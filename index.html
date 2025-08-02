@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utkarsh Patel - Portfolio [Matrix V.2.0]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        const matrixGreen = '#20C20E';
+        const matrixGreenDark = '#1A990B';
+        const matrixGreenDarker = '#106007';
+        const matrixGlowColor = 'rgba(32, 194, 14, 0.4)';
+        const matrixGlowSmColor = 'rgba(32, 194, 14, 0.3)';
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['Roboto Mono', 'monospace'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'matrix-bg': '#000000',
+                        'matrix-green': matrixGreen,
+                        'matrix-green-darker': matrixGreenDarker,
+                        'matrix-green-dark': matrixGreenDark,
+                        'matrix-text': '#E0E0E0',
+                        'matrix-text-dim': '#A0A0A0',
+                    },
+                    boxShadow: {
+                        'matrix-glow': `0 0 15px 5px ${matrixGlowColor}`,
+                        'matrix-glow-sm': `0 0 8px 2px ${matrixGlowSmColor}`,
+                    },
+                    keyframes: {
+                        subtleFlicker: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.95 }, },
+                        blink: { 'from, to': { opacity: 0 }, '50%': { opacity: 1 }, },
+                        fadeInUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'translateY(0)' }, },
+                        pulseGlow: { '0%, 100%': { textShadow: '0 0 4px var(--matrix-green)' }, '50%': { textShadow: '0 0 8px var(--matrix-green), 0 0 12px var(--matrix-green)' }, }
+                    },
+                    animation: {
+                        'subtle-flicker': 'subtleFlicker 2.5s ease-in-out infinite',
+                        'blink': 'blink 1s step-end infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-matrix-bg text-matrix-text font-mono no-scroll relative">
+    <div class="scanline-overlay"></div>
+
+    <div id="tsparticles" class="fixed top-0 left-0 w-full h-full z-[-1]"></div>
+
+    <div id="intro-overlay" class="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center transition-opacity duration-1000 ease-out">
+        <div id="terminal-text" class="font-mono text-lg md:text-xl lg:text-2xl text-matrix-green p-5 z-50 text-shadow-matrix">
+            <span id="typed-text"></span><span class="terminal-cursor"></span>
+        </div>
+        <canvas id="matrix-canvas"></canvas>
+    </div>
+
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000 ease-in-out relative z-10">
+
+        <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center px-6 py-16 bg-black/70 backdrop-blur-sm hero-section-interactive">
+             <img src="utkarsh.PNG" alt="Utkarsh Patel" class="profile-image hero-anim-delay-1" onerror="this.onerror=null; this.src='https://placehold.co/160x160/000000/20C20E?text=UTKARSH';">
+             <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold uppercase mb-3 text-matrix-green text-shadow-matrix tracking-wider hero-name hero-anim-delay-2">
+                 Utkarsh Patel
+             </h1>
+             <p class="text-xl md:text-2xl font-bold text-matrix-green mb-6 text-shadow-matrix-sm animate-pulse-glow hero-tagline hero-anim-delay-3">
+                 Be Awesome_
+             </p>
+             <p class="text-base md:text-lg text-matrix-text-dim max-w-2xl mx-auto mb-8 leading-relaxed font-sans hero-desc hero-anim-delay-4">
+                 &gt; Hi, I'm Utkarsh! A Computer Science Engineering student diving deep into technology. I'm an extroverted, fun-loving individual always eager to learn, explore research, and build exciting CSE projects. Fluent in English and Hindi, currently learning German!
+             </p>
+             <div class="flex justify-center space-x-6 mb-8 hero-socials hero-anim-delay-5">
+                  <a href="mailto:utkarshishu2627@example.com" target="_blank" class="social-link" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></a>
+                  <a href="https://github.com/Utkarsh-patel26" target="_blank" class="social-link" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 16 16"> <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/> </svg></a>
+                  <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" class="social-link" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="currentColor" viewBox="0 0 16 16"> <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.377 0-1.964.72-2.298 1.335h.039v-1.18H6.643v7.225z"/> </svg></a>
+             </div>
+             <a href="#projects" class="cta-button hero-cta hero-anim-delay-6">Access Projects &gt;&gt;</a>
+        </section>
+
+        <div class="container mx-auto px-4 sm:px-6 py-16 md:py-24 space-y-16 md:space-y-24">
+
+            <section id="skills" class="fade-in-section">
+                <h2 class="section-title">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="matrix-data-block">
+                        <h3 class="matrix-data-title">Languages</h3>
+                        <ul class="matrix-data-list"><li>Python</li> <li>C Language</li> <li>Java</li> <li>JavaScript</li> <li>HTML / CSS</li></ul>
+                    </div>
+                    <div class="matrix-data-block">
+                        <h3 class="matrix-data-title">Frameworks & Libs</h3>
+                        <ul class="matrix-data-list"><li>React</li> <li>Node.js</li> <li>Tailwind CSS</li> <li>Flutter <span class="text-xs font-normal">(Learning)</span></li> <li>Flask</li></ul>
+                    </div>
+                    <div class="matrix-data-block">
+                        <h3 class="matrix-data-title">Tools & Platforms</h3>
+                        <ul class="matrix-data-list"><li>Git & GitHub</li> <li>Firebase</li> <li>VS Code</li></ul>
+                    </div>
+                    <div class="matrix-data-block">
+                        <h3 class="matrix-data-title">Databases</h3>
+                        <ul class="matrix-data-list"><li>MySQL</li> <li>MongoDB</li></ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="fade-in-section">
+                <h2 class="section-title">Project_Archive</h2>
+                <div class="projects-carousel-container">
+                    <div class="projects-track">
+                        <div class="matrix-card project-card-item" data-original-index="0">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <img src="todo.png" alt="ToDo List Preview" class="project-image"/>
+                                    <h3 class="project-title-front">ToDo List</h3>
+                                </div>
+                                <div class="card-back">
+                                    <h3 class="project-title-back">ToDo List</h3>
+                                    <p class="project-desc">This web-based application transforms daily tasks into thrilling quests, combining productivity with a gamified, futuristic user interface. Designed to boost motivation and user engagement, the platform reimagines your to-do list as an immersive, sci-fi adventure.</p>
+                                    <div class="project-tags"><span>#Html</span><span>#Css</span><span>#JavaScript</span></div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Utkarsh-patel26/Todo-List" target="_blank" class="project-link">Source &gt;&gt;</a>
+                                        <a href=" https://utkarsh-patel26.github.io/Todo-List/" target="_blank" class="project-link" title="Live project link not available">Visit &gt;&gt;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="matrix-card project-card-item" data-original-index="1">
+                             <div class="card-inner">
+                                <div class="card-front">
+                                     <img src="crime.png" alt="Crime Justice System Preview" class="project-image"/>
+                                     <h3 class="project-title-front">Crime Justice System</h3>
+                                </div>
+                                <div class="card-back">
+                                    <h3 class="project-title-back">Crime Justice System</h3>
+                                    <p class="project-desc">This platform is a user-friendly and secure web application designed to streamline the reporting of crime incidents in a structured and efficient manner. It empowers individuals and communities to document and report criminal activity while also providing vital tools for real-time safety responses.</p>
+                                    <div class="project-tags"><span>#Html</span><span>#CSS</span><span>#JavaScript</span></div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Utkarsh-patel26/crime-justice" target="_blank" class="project-link">Source &gt;&gt;</a>
+                                        <a href="https://utkarsh-patel26.github.io/crime-justice/" target="_blank" class="project-link" title="Live project link not available">Visit &gt;&gt;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="matrix-card project-card-item" data-original-index="2">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                     <img src="physics.png" alt="1D Elastic Collision Preview" class="project-image"/>
+                                     <h3 class="project-title-front">1D Elastic Collision Sim</h3>
+                                </div>
+                                <div class="card-back">
+                                    <h3 class="project-title-back">1D Elastic Collision Sim</h3>
+                                    <p class="project-desc">This interactive web-based simulation provides a visual and educational demonstration of one-dimensional (1D) elastic collisions between two objects. Designed with physics learners and educators in mind, the simulation allows users to experiment with different initial conditions and observe how momentum and kinetic energy are conserved during collisions.</p>
+                                    <div class="project-tags"><span>#Html</span><span>#Css</span><span>#JavaScript</span></div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Utkarsh-patel26/1D-Elastic-Collision" target="_blank" class="project-link">Source &gt;&gt;</a>
+                                        <a href="https://utkarsh-patel26.github.io/1D-Elastic-Collision/" target="_blank" class="project-link" title="Live project link not available">Visit &gt;&gt;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="matrix-card project-card-item" data-original-index="2">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                     <img src="pub.png" alt="Pub_Collectors" class="project-image"/>
+                                     <h3 class="project-title-front">Pub_Collectors</h3>
+                                </div>
+                                <div class="card-back">
+                                    <h3 class="project-title-back">Pub Collectors</h3>
+                                    <p class="project-desc">This project is a web-based application designed to help users analyze publication records from Excel files. Specifically, it allows users to upload an Excel file where the first column contains the names of authors, labeled under the header author_nm.</p>
+                                    <div class="project-tags"><span>#Html</span><span>#Css</span><span>#Python</span></div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Colluded-Projects/pub_collectors" target="_blank" class="project-link">Source &gt;&gt;</a>
+                                        <a href="https://colluded-projects.github.io/pub_collectors/" target="_blank" class="project-link" title="Live project link not available">Visit &gt;&gt;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div> <button class="carousel-arrow left" aria-label="Previous Project">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+                         </button>
+                         <button class="carousel-arrow right" aria-label="Next Project">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+                         </button>
+
+                 </div> <p class="text-center mt-12 text-matrix-text-dim font-mono text-sm">
+                     More projects available on <a href="https://github.com/Utkarsh-patel26" target="_blank" class="text-matrix-green hover:underline">GitHub</a>
+                 </p>
+            </section>
+
+            <section id="education" class="fade-in-section">
+                <h2 class="section-title">Education_Log</h2>
+                 <div class="max-w-3xl mx-auto matrix-data-block p-8">
+                     <h3 class="text-2xl font-semibold mb-2 text-matrix-green">Bachelor of Engineering - Computer Science</h3>
+                     <p class="text-matrix-text font-medium mb-1">&gt; Ramaiah Institute of Technology, Bengaluru, Karnataka</p>
+                     <p class="text-matrix-text-dim text-sm mb-4">&gt;&gt; Expected Graduation: 2027 | Status: Second Year</p>
+                     <p class="text-matrix-text font-semibold font-sans">&gt; Relevant Coursework:</p>
+                     <ul class="list-disc list-inside ml-4 text-matrix-text font-sans"><li>Data Structures & Algorithms</li><li>Object-Oriented Programming</li><li>Database Management Systems</li><li>Web Development</li></ul>
+                 </div>
+            </section>
+
+            <section id="experience" class="fade-in-section">
+                <h2 class="section-title">Experience_Record</h2>
+                 <div class="max-w-3xl mx-auto space-y-8">
+                     <div class="matrix-data-block p-6">
+                         <h3 class="text-xl font-semibold mb-1 text-matrix-green">IEEE - Computer Science Chapter</h3>
+                         <p class="text-matrix-text font-medium mb-1">&gt; Location: Bengaluru</p>
+                         <p class="text-matrix-text-dim text-sm mb-3">&gt;&gt; Designation: Vice Chair [December 2024 - Present]</p>
+                         <ul class="list-['>_'] list-inside text-matrix-text font-sans space-y-1 pl-2"><li>Coordinated technical events and managed team responsibilities.</li><li>Enhanced collaboration, communication, and initiative-driving skills within the tech community.</li></ul>
+                     </div>
+                     <p class="text-center text-matrix-text-dim italic">&gt;&gt; Status: Actively seeking internship opportunities...</p>
+                 </div>
+            </section>
+
+            <section id="achievements" class="fade-in-section">
+                <h2 class="section-title">Achievements_Data</h2>
+                 <div class="max-w-3xl mx-auto matrix-data-block p-8">
+                     <ul class="list-['>_'] list-inside text-matrix-text space-y-2 font-sans pl-2"><li>Certificate: CERTIFICATE OF PRESENTATION</li><li>Event: INTERNATIONAL CONFERENCE ON ARTIFICIAL INTELLIGENCE & DIGITAL TECHNOLOGIES</li><li>Presented Paper: Automated information extraction from legal databases and texts</li></ul>
+                 </div>
+            </section>
+
+            <section id="resume" class="text-center fade-in-section pb-16 md:pb-24">
+                 <h2 class="section-title">Download_Payload</h2>
+                 <a href="resume.pdf" target="_blank" download="Utkarsh_Patel_Resume.pdf" class="cta-button">Get Resume.pdf &gt;&gt;</a>
+            </section>
+
+        </div> </div> <script src="script.js"></script>
+</body>
+</html>
