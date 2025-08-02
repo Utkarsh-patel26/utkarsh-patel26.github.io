@@ -1,300 +1,242 @@
+/*
+ * SCRIPT.JS - SYSTEM SHELL v8.0 (Final & Bulletproof)
+ * Manages boot sequence, background, and all interactive effects with robust error handling.
+ */
 document.addEventListener('DOMContentLoaded', () => {
 
-    const matrixGreen = '#20C20E';
+    // --- CONFIG & DATA ---
+    const BOOT_TEXTS = ["INITIATING BIOS...", "MEMORY CHECK...", "LOADING KERNEL...", "MOUNTING CORE...", "DECRYPTING UI...", "SYSTEM ONLINE"];
+    const SKILLS_DATA = {
+        "LANGUAGES": [
+            { name: "Python", level: 90 }, { name: "JavaScript / TS", level: 85 }, 
+            { name: "Java", level: 75 }, { name: "C", level: 60 }, { name: "SQL", level: 80 }
+        ],
+        "TECHNOLOGIES": [
+            { name: "React", level: 85 }, { name: "Node.js", level: 80 }, 
+            { name: "Docker", level: 70 }, { name: "Spring Boot", level: 70 }
+        ],
+        "DATABASES": [
+            { name: "PostgreSQL", level: 80 }, { name: "MongoDB", level: 75 }
+        ],
+        "CONCEPTS": [
+            { name: "System Design", level: 85 }, { name: "Data Structures", level: 90 }
+        ]
+    };
+    const PROJECTS_DATA = [
+        { title: "ToDo List", desc: "A gamified task management system with a futuristic UI.", tags: ["JS", "HTML", "CSS"], link: "https://github.com/Utkarsh-patel26/Todo-List" },
+        { title: "Crime Justice System", desc: "A streamlined incident reporting and community safety platform.", tags: ["JS", "Firebase"], link: "https://github.com/Utkarsh-patel26/crime-justice" },
+        { title: "1D Elastic Collision", desc: "An interactive physics simulation for educational purposes.", tags: ["JS", "HTML", "CSS"], link: "https://github.com/Utkarsh-patel26/1D-Elastic-Collision" },
+        { title: "Pub_Collectors", desc: "A data analysis tool for processing publication records from Excel.", tags: ["Python", "Flask"], link: "https://github.com/Colluded-Projects/pub_collectors" }
+    ];
 
-    const introOverlay = document.getElementById('intro-overlay');
-    const terminalTextElement = document.getElementById('typed-text');
-    const mainContent = document.getElementById('main-content');
-    const bodyElement = document.body;
-    const matrixCanvas = document.getElementById('matrix-canvas');
-    const ctx = matrixCanvas ? matrixCanvas.getContext('2d') : null;
+    // --- INITIALIZATION ---
+    async function init() {
+        safelyRun(startMatrixBackground, 'startMatrixBackground');
+        await runBootSequence();
 
-    if (!introOverlay || !terminalTextElement || !mainContent || !bodyElement) {
-        if(mainContent) mainContent.style.opacity = '1';
-        if(bodyElement) bodyElement.classList.remove('no-scroll');
-        loadParticles();
-        setupProjectCarousel();
-        return;
-    }
+        const loader = document.getElementById('loader');
+        const mainInterface = document.getElementById('main-interface');
 
-    const textToType = "> connect::utkarsh_patel_portfolio_v2.0 ... AUTH_OK ... Rendering Interface ...";
-    let typingIndex = 0;
-    const typingSpeed = 80;
-    const matrixPause = 200;
-    const matrixDuration = 2500;
-    const fadeOutDuration = 600;
-    let animationFrameId;
-    let introEnded = false;
-
-    function typeCharacter() {
-        if (introEnded) return;
-        if (typingIndex < textToType.length) {
-            terminalTextElement.textContent += textToType.charAt(typingIndex);
-            typingIndex++;
-            setTimeout(typeCharacter, typingSpeed);
-        } else {
-            const cursor = document.querySelector('.terminal-cursor');
-            if (cursor) cursor.style.display = 'none';
-            if (ctx) {
-                setTimeout(startMatrixEffect, matrixPause);
-            } else {
-                setTimeout(endIntro, matrixPause + matrixDuration);
-            }
-        }
-    }
-
-    function startMatrixEffect() {
-        if (introEnded || !ctx) {
-             if(!introEnded) endIntro();
-             return;
-        }
-        matrixCanvas.width = window.innerWidth;
-        matrixCanvas.height = window.innerHeight;
-        matrixCanvas.style.opacity = '0.7';
-
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ';
-        const fontSize = 16;
-        const columns = Math.ceil(matrixCanvas.width / fontSize);
-        const drops = Array(columns).fill(1);
-        const targetFrames = (matrixDuration / 1000) * 60;
-        let frameCount = 0;
-
-        function drawMatrix() {
-            if (introEnded) {
-                 if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                 return;
-            }
-
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
-            ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-
-            ctx.fillStyle = matrixGreen;
-            ctx.font = fontSize + 'px Roboto Mono';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters[Math.floor(Math.random() * characters.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-
-            frameCount++;
-            if (frameCount < targetFrames && !introEnded) {
-                animationFrameId = requestAnimationFrame(drawMatrix);
-            } else if (!introEnded) {
-                endIntro();
-            }
-        }
-        drawMatrix();
-        setTimeout(() => { if (!introEnded) { endIntro(); } }, matrixDuration + 500);
-    }
-
-    function endIntro() {
-        if (introEnded) return;
-        introEnded = true;
-        if (animationFrameId) { cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-        if (matrixCanvas) matrixCanvas.style.opacity = '0';
-        introOverlay.style.opacity = '0';
-        setTimeout(() => {
-            introOverlay.style.display = 'none';
-            mainContent.style.opacity = '1';
-            bodyElement.classList.remove('no-scroll');
-            loadParticles();
-            setupProjectCarousel();
-            initializeHeroAnimations(); // Initialize Hero animations after intro
-        }, fadeOutDuration);
-       }
-
-    function loadParticles() {
-        if (typeof tsParticles === 'undefined') { return; }
-        tsParticles.load("tsparticles", {
-            fpsLimit: 60,
-            particles: {
-                number: { value: 130, density: { enable: true, value_area: 800 } },
-                color: { value: matrixGreen },
-                shape: { type: "character", character: { value: ["0", "1"], font: "Roboto Mono", style: "", weight: "400", fill: true } },
-                opacity: { value: { min: 0.2, max: 0.6 }, random: true, anim: { enable: true, speed: 0.9, opacity_min: 0.1, sync: false } },
-                size: { value: 10, random: false }, links: { enable: false },
-                move: { enable: true, speed: 2.5, direction: "bottom", random: false, straight: true, out_mode: "out", bounce: false, attract: { enable: false } }
-            },
-            interactivity: { detect_on: "canvas", events: { onhover: { enable: false }, onclick: { enable: false }, resize: true }, },
-            detectRetina: true, background: { color: '#000000', }
-        }).catch(error => console.error("tsParticles loading error:", error));
-       }
-
-    let carouselIntervalId;
-    const autoSlideInterval = 3000;
-    const visibleCards = 3;
-
-    function setupProjectCarousel() {
-        const container = document.querySelector('.projects-carousel-container');
-        const track = document.querySelector('.projects-track');
-        if (!track || !container) { return; }
-
-        const originalCards = Array.from(track.querySelectorAll('.project-card-item:not(.is-clone)'));
-        if (originalCards.length <= visibleCards) {
-            container.style.overflow = 'visible';
-             if (container.querySelector('.carousel-arrow.left')) container.querySelector('.carousel-arrow.left').style.display = 'none';
-             if (container.querySelector('.carousel-arrow.right')) container.querySelector('.carousel-arrow.right').style.display = 'none';
+        if (!loader || !mainInterface) {
+            console.error("CRITICAL ERROR: #loader or #main-interface element not found.");
             return;
         }
 
-        const cardWidth = originalCards[0].offsetWidth;
-        const gap = 24;
-        track.style.gap = `${gap}px`;
-        const cardWidthWithGap = cardWidth + gap;
-
-        // Clear existing clones before adding new ones
-        track.querySelectorAll('.is-clone').forEach(clone => clone.remove());
-
-
-        const cardsToCloneStart = originalCards.slice(0, visibleCards);
-        const cardsToCloneEnd = originalCards.slice(-visibleCards);
-
-        cardsToCloneEnd.slice().reverse().forEach(card => { // Use slice to avoid modifying original
-            const clone = card.cloneNode(true);
-            clone.classList.add('is-clone');
-            track.insertBefore(clone, track.firstChild);
-        });
-
-        cardsToCloneStart.forEach(card => {
-            const clone = card.cloneNode(true);
-            clone.classList.add('is-clone');
-            track.appendChild(clone);
-        });
-
-        const allCards = Array.from(track.children);
-
-        let currentIndex = 0;
-        let currentTranslate = -(visibleCards * cardWidthWithGap);
-        track.style.transform = `translateX(${currentTranslate}px)`;
-        track.style.transition = 'none';
-
-        const nextButton = container.querySelector('.carousel-arrow.right');
-        const prevButton = container.querySelector('.carousel-arrow.left');
-        if (!nextButton || !prevButton) { return; }
-
-        let isTransitioning = false;
-
-        const updateCenterCard = () => {
-            allCards.forEach(card => card.classList.remove('is-center'));
-            const centerPhysicalIndex = visibleCards + currentIndex + Math.floor(visibleCards / 2);
-            if (centerPhysicalIndex >= 0 && centerPhysicalIndex < allCards.length) {
-                 allCards[centerPhysicalIndex].classList.add('is-center');
-            }
-        };
-
-
-        const moveTo = (logicalIndex) => {
-            if (isTransitioning) return;
-            isTransitioning = true;
-
-            const physicalIndex = logicalIndex + visibleCards;
-            currentTranslate = -(physicalIndex * cardWidthWithGap);
-
-            track.style.transition = 'transform 0.5s ease-in-out';
-            track.style.transform = `translateX(${currentTranslate}px)`;
-            currentIndex = logicalIndex;
-        };
-
-        track.addEventListener('transitionend', () => {
-            isTransitioning = false;
-
-            let jumpNeeded = false;
-            let newLogicalIndex = currentIndex;
-
-            if (currentIndex < 0) {
-                newLogicalIndex = currentIndex + originalCards.length;
-                jumpNeeded = true;
-            } else if (currentIndex >= originalCards.length) {
-                newLogicalIndex = currentIndex - originalCards.length;
-                jumpNeeded = true;
-            }
-
-            if (jumpNeeded) {
-                const physicalIndex = newLogicalIndex + visibleCards;
-                currentTranslate = -(physicalIndex * cardWidthWithGap);
-                track.style.transition = 'none';
-                track.style.transform = `translateX(${currentTranslate}px)`;
-                currentIndex = newLogicalIndex;
-            }
-
-            updateCenterCard();
-        });
-
-        nextButton.addEventListener('click', () => {
-            moveTo(currentIndex + 1);
-            resetAutoSlide();
-        });
-        prevButton.addEventListener('click', () => {
-            moveTo(currentIndex - 1);
-            resetAutoSlide();
-        });
-
-        const startAutoSlide = () => {
-            stopAutoSlide();
-            if (originalCards.length > visibleCards) { // Only start if enough cards
-                 carouselIntervalId = setInterval(() => {
-                     moveTo(currentIndex + 1);
-                 }, autoSlideInterval);
-             }
-        };
-        const stopAutoSlide = () => {
-            clearInterval(carouselIntervalId);
-        };
-        const resetAutoSlide = () => {
-            stopAutoSlide();
-            startAutoSlide();
-        };
-
-        container.addEventListener('mouseenter', stopAutoSlide);
-        container.addEventListener('mouseleave', startAutoSlide);
+        loader.style.opacity = '0';
 
         setTimeout(() => {
-            track.style.transition = 'transform 0.5s ease-in-out';
-            updateCenterCard();
-            startAutoSlide();
-        }, 100);
+            loader.style.display = 'none';
+            mainInterface.style.opacity = '1';
+            document.body.style.overflow = 'auto';
+            
+            safelyRun(populateSkills, 'populateSkills');
+            safelyRun(populateProjects, 'populateProjects');
+            safelyRun(setupScrollAnimations, 'setupScrollAnimations');
+            safelyRun(setupNavHighlighting, 'setupNavHighlighting');
+            safelyRun(startSystemTime, 'startSystemTime');
+            safelyRun(setupInteractiveText, 'setupInteractiveText');
+            safelyRun(runHeroDecode, 'runHeroDecode'); // FIX: Run hero decode separately
 
+        }, 1000);
     }
 
-    function initializeHeroAnimations() {
-        const heroSection = document.querySelector('.hero-section-interactive');
-        if (heroSection) {
-            // Triggering reflow to ensure animations restart if needed,
-            // though primarily handled by opacity change now.
-            void heroSection.offsetWidth;
-        }
+    // --- HELPER for robust function execution ---
+    function safelyRun(fn, name) {
+        try { fn(); } catch (error) { console.error(`Error in function "${name}":`, error); }
     }
 
-    document.querySelectorAll('a.cta-button[href^="#"], a.scroll-smooth-button[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth' }); }
+    // --- BOOT SEQUENCE ---
+    function runBootSequence() {
+        const loaderText = document.getElementById('loader-text');
+        if (!loaderText) return Promise.resolve();
+        const totalDuration = 2500;
+        const delay = totalDuration / BOOT_TEXTS.length;
+        
+        return new Promise(resolve => {
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < BOOT_TEXTS.length) {
+                    loaderText.textContent = BOOT_TEXTS[i];
+                    i++;
+                } else {
+                    clearInterval(interval);
+                    resolve();
+                }
+            }, delay);
         });
-    });
+    }
 
-    const sections = document.querySelectorAll('.fade-in-section');
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+    // --- MATRIX BACKGROUND ---
+    function startMatrixBackground() {
+        const canvas = document.getElementById('matrix-background');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        
+        const alphabet = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン01';
+        const fontSize = 18;
+        const columns = Math.ceil(width / fontSize);
+        const rainDrops = Array.from({ length: columns }).map(() => Math.floor(Math.random() * height / fontSize));
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(3, 10, 5, 0.04)';
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(0, 255, 127, 0.7)';
+            ctx.font = fontSize + 'px monospace';
+            rainDrops.forEach((y, i) => {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > height && Math.random() > 0.975) rainDrops[i] = 0;
+                rainDrops[i]++;
+            });
+        };
+        setInterval(draw, 50);
+        window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+    }
+
+    // --- DYNAMIC CONTENT ---
+    function populateSkills() {
+        const container = document.getElementById('skills-grid');
+        if (!container) return;
+        container.innerHTML = Object.entries(SKILLS_DATA).map(([category, skills]) => `
+            <div class="skill-category">
+                <h3 class="skill-category-title" data-text="${category}">${category}</h3>
+                <ul class="skill-list">
+                    ${skills.map(skill => `<li class="skill-item">${skill.name}<div class="skill-bar"><div class="skill-bar-fill" style="--skill-level: ${skill.level}%"></div></div></li>`).join('')}
+                </ul>
+            </div>
+        `).join('');
+    }
+
+    function populateProjects() {
+        const grid = document.getElementById('projects-grid');
+        if (!grid) return;
+        grid.innerHTML = PROJECTS_DATA.map(p => `
+            <a href="${p.link}" target="_blank" class="project-card" rel="noopener noreferrer">
+                <div class="project-header">
+                    <h3 class="project-title">${p.title}</h3>
+                    <span class="project-status">Online</span>
+                </div>
+                <div class="project-content">
+                    <p class="project-desc">${p.desc}</p>
+                    <div class="project-tags">${p.tags.map(tag => `<span class="project-tag">#${tag}</span>`).join(' ')}</div>
+                </div>
+            </a>
+        `).join('');
+    }
+
+    // --- UI & INTERACTIVITY ---
+    function setupScrollAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.content-section').forEach(el => observer.observe(el));
+    }
+
+    function setupNavHighlighting() {
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.content-section');
+        if (navItems.length === 0 || sections.length === 0) return;
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(nav => nav.classList.toggle('active', nav.getAttribute('href') === `#${id}`));
+                }
+            });
+        }, { rootMargin: '-50% 0px -50% 0px' });
+        sections.forEach(s => observer.observe(s));
+    }
+
+    function startSystemTime() {
+        const timeEl = document.getElementById('system-time');
+        if (!timeEl) return;
+        const updateTime = () => {
+            const now = new Date();
+            timeEl.textContent = `[${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}]`;
+        };
+        updateTime();
+        setInterval(updateTime, 1000);
+    }
+    
+    // --- TEXT DECODING EFFECT ---
+    const scrambleChars = '!<>-_\\/[]{}—=+*^?#';
+
+    function runHeroDecode() {
+        document.querySelectorAll('.decode-text').forEach(el => {
+            const originalText = el.dataset.value;
+            let iteration = 0;
+            const interval = setInterval(() => {
+                el.textContent = originalText.split('').map((char, index) => {
+                    if (index < iteration) return originalText[index];
+                    if (char === ' ') return ' ';
+                    return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                }).join('');
+                if (iteration >= originalText.length) clearInterval(interval);
+                iteration += originalText.length / 40; // Faster decode
+            }, 30);
         });
-    }, { threshold: 0.1 });
-    sections.forEach(section => { observer.observe(section); });
+    }
 
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-           // Re-setup carousel on resize to adjust widths
-            setupProjectCarousel();
-        }, 250);
-    });
+    function setupInteractiveText() {
+        document.querySelectorAll('[data-text]').forEach(el => {
+            const originalText = el.dataset.text;
+            let animationFrameId;
 
-    setTimeout(typeCharacter, 500);
+            el.addEventListener('mouseenter', () => {
+                let iteration = 0;
+                cancelAnimationFrame(animationFrameId);
+                
+                const animate = () => {
+                    el.textContent = originalText.split('').map((char, index) => {
+                        if (index < iteration) return originalText[index];
+                        if (char === ' ') return ' ';
+                        return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+                    }).join('');
 
+                    if (iteration < originalText.length) {
+                        iteration += 1;
+                        animationFrameId = requestAnimationFrame(animate);
+                    } else {
+                        el.textContent = originalText;
+                    }
+                };
+                animationFrameId = requestAnimationFrame(animate);
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cancelAnimationFrame(animationFrameId);
+                el.textContent = originalText;
+            });
+        });
+    }
+
+    // --- RUN ---
+    init();
 });
