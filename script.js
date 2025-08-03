@@ -1,11 +1,7 @@
-/*
- * SCRIPT.JS - SYSTEM SHELL v8.0 (Final & Bulletproof)
- * Manages boot sequence, background, and all interactive effects with robust error handling.
- */
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- CONFIG & DATA ---
-    const BOOT_TEXTS = ["INITIATING BIOS...", "MEMORY CHECK...", "LOADING KERNEL...", "MOUNTING CORE...", "DECRYPTING UI...", "SYSTEM ONLINE"];
+    const BOOT_TEXTS = ["INITIATING BIOS...", "MEMORY CHECK...", "LOADING KERNEL...", "MOUNTING CORE...", "DECRYPTING UI...", "SYSTEM ONLINE", "THE MATRIX IS REAL"];
     const SKILLS_DATA = {
         "LANGUAGES": [
             { name: "Python", level: 90 }, { name: "JavaScript / TS", level: 85 }, 
@@ -23,10 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
     const PROJECTS_DATA = [
-        { title: "ToDo List", desc: "A gamified task management system with a futuristic UI.", tags: ["JS", "HTML", "CSS"], link: "https://github.com/Utkarsh-patel26/Todo-List" },
+        { title: "Halem-Pegasis-Evaluator", desc: "A simulation and evaluation tool for comparing the standard PEGASIS protocol with the novel HALEM-PEGASIS protocol in Wireless Sensor Networks (WSNs).", tags: ["Java", "Python"], link: "https://github.com/Utkarsh-patel26/halem-pegasis-evaluator" },
+        { title: "Pub_Collectors", desc: "A data analysis tool for processing publication records from Excel.", tags: ["Python", "Flask"], link: "https://github.com/Colluded-Projects/pub_collectors" },
         { title: "Crime Justice System", desc: "A streamlined incident reporting and community safety platform.", tags: ["JS", "Firebase"], link: "https://github.com/Utkarsh-patel26/crime-justice" },
-        { title: "1D Elastic Collision", desc: "An interactive physics simulation for educational purposes.", tags: ["JS", "HTML", "CSS"], link: "https://github.com/Utkarsh-patel26/1D-Elastic-Collision" },
-        { title: "Pub_Collectors", desc: "A data analysis tool for processing publication records from Excel.", tags: ["Python", "Flask"], link: "https://github.com/Colluded-Projects/pub_collectors" }
+        { title: "1D Elastic Collision", desc: "An interactive physics simulation for educational purposes.", tags: ["JS", "HTML", "CSS"], link: "https://github.com/Utkarsh-patel26/1D-Elastic-Collision" }
+        
     ];
 
     // --- INITIALIZATION ---
@@ -55,17 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
             safelyRun(setupNavHighlighting, 'setupNavHighlighting');
             safelyRun(startSystemTime, 'startSystemTime');
             safelyRun(setupInteractiveText, 'setupInteractiveText');
-            safelyRun(runHeroDecode, 'runHeroDecode'); // FIX: Run hero decode separately
+            safelyRun(runHeroDecode, 'runHeroDecode');
 
         }, 1000);
     }
 
-    // --- HELPER for robust function execution ---
     function safelyRun(fn, name) {
         try { fn(); } catch (error) { console.error(`Error in function "${name}":`, error); }
     }
 
-    // --- BOOT SEQUENCE ---
     function runBootSequence() {
         const loaderText = document.getElementById('loader-text');
         if (!loaderText) return Promise.resolve();
@@ -94,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
         
-        const alphabet = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン01';
-        const fontSize = 18;
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789アカサタナハマヤラワイキシチニヒミリウクスツヌフムユルエケセテネヘメレオコソトノホモヨロ';
+        const fontSize = 20;
         const columns = Math.ceil(width / fontSize);
         const rainDrops = Array.from({ length: columns }).map(() => Math.floor(Math.random() * height / fontSize));
 
@@ -199,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
                 }).join('');
                 if (iteration >= originalText.length) clearInterval(interval);
-                iteration += originalText.length / 40; // Faster decode
+                iteration += originalText.length / 40; 
             }, 30);
         });
     }
@@ -237,6 +232,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- RUN ---
     init();
 });
