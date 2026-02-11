@@ -3,88 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO Meta Tags -->
-    <title>Utkarsh Patel :: System Shell v8.0</title>
-    <meta name="description" content="System Shell Interface for Utkarsh Patel, a Computer Science Engineer specializing in software architecture, cloud-native technologies, and machine learning.">
-    <meta name="keywords" content="Utkarsh Patel, Portfolio, Developer, Computer Science, System Interface, Matrix, Interactive, Cloud, AI">
-
-    <!-- Favicon -->
-    <link rel="icon" href="matrix-scene.png">
+    <title>Utkarsh Patel | Software Engineer</title>
+    <meta name="description" content="Portfolio of Utkarsh Patel, a Software Engineer specializing in backend systems and full-stack development.">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
 </head>
 <body>
-    <canvas id="matrix-background"></canvas>
-    <div class="crt-overlay"></div>
-    <div id="loader">
-        <div id="loader-content">
-            <div class="loader-grid"></div>
-            <span id="loader-text"></span>
-        </div>
-    </div>
 
-    <!-- Main System Interface -->
-    <div id="main-interface">
-        <header class="system-header">
-            <div class="header-logo" data-text="U_PATEL_SHELL">U_PATEL_SHELL</div>
-            <nav class="system-nav">
-                <a href="#hero" class="nav-item active" data-text="[AUTH_ID]">[AUTH_ID]</a>
-                <a href="#skills" class="nav-item" data-text="[CORE_MODS]">[CORE_MODS]</a>
-                <a href="#projects" class="nav-item" data-text="[ARCHIVES]">[ARCHIVES]</a>
-                <a href="#contact" class="nav-item" data-text="[COM_LINK]">[COM_LINK]</a>
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">Utkarsh Patel<span style="color:var(--text-accent)">.</span></a>
+            
+            <nav class="nav-menu">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </nav>
-            <div id="system-status">
-                <span id="connection-status" title="Connection Status">●</span>
-                <span>STATUS: <span class="status-ok">SECURE</span></span>
-                <span id="system-time"></span>
+
+            <div class="mobile-toggle">
+                <span>☰</span>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <main class="system-content">
-            <section id="hero" class="content-section">
-                <div class="hero-container">
-                    <div class="hero-text">
-                        <h1 class="decode-text" data-value="Utkarsh Patel">Utkarsh Patel</h1>
-                        <p class="hero-tagline decode-text" data-value="Computer Science & Engineering">Computer Science & Engineering</p>
-                        <p class="hero-desc decode-text" data-value=">I code, I eat, I talk to my girlfriend, and then I code again. That’s the loop. I’m not great at dancing, networking events confuse me, and I’ve probably debugged more late-night bugs than I’ve attended parties. But if you give me a problem and a keyboard, I’ll disappear and come back with something that works. If you're doing something bold, weird, or meaningful — hit me up. I’m probably already awake and compiling."></p>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-grid">
+            <div class="hero-content fade-in-up">
+                <div class="hero-badge">Available for Hire</div>
+                <h1 class="hero-title">Building <span class="text-gradient">scalable</span> backend systems</h1>
+                <p class="hero-role" style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 500;">Software Engineer | Backend & Full-Stack Developer</p>
+                <p class="hero-text">
+                    Results-driven Computer Science engineer specializing in Java, scalable backend systems, and full-stack applications. Experienced in designing performant architectures and building production-ready software. Passionate about clean code, system design, and engineering excellence.
+                </p>
+                
+                <div class="hero-skills">
+                    <span>Java</span> • <span>Spring Boot</span> • <span>React</span> • <span>Node.js</span> • <span>MySQL</span> • <span>REST APIs</span> • <span>DSA</span>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="Resume.pdf" class="btn btn-primary" download="Utkarsh_Patel_Resume.pdf">View Resume</a>
+                    <a href="https://github.com/Utkarsh-patel26" target="_blank" class="btn btn-outline">GitHub</a>
+                    <a href="#contact" class="btn btn-outline">Contact</a>
+                </div>
+            </div>
+
+            <div class="hero-img-wrapper fade-in-up stagger-1">
+                <div class="hero-img-backdrop"></div>
+                <img src="utkarsh.PNG" alt="Utkarsh Patel" class="hero-img" onerror="this.src='https://placehold.co/400x440/1E2D4C/ACBDAA?text=UP'">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container fade-in-up">
+            <h2 class="section-title">About Me</h2>
+            <p class="about-text">
+                I am a Computer Science graduate with strong fundamentals in data structures, algorithms, and backend engineering. I enjoy designing efficient systems and building reliable, production-ready software. My focus is on scalability, performance, and maintainable code that solves real-world problems.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            
+            <div class="skills-container fade-in-up">
+                <!-- Languages -->
+                <div class="skill-card">
+                    <div class="skill-title">
+                        <span class="skill-icon">💻</span> Languages
                     </div>
-                    <div class="hero-image-container">
-                        <img src="utkarsh.PNG" alt="Utkarsh Patel" class="profile-image" onerror="this.onerror=null; this.src='https://placehold.co/300x300/000000/00ff7f?text=NO_SIGNAL';">
-                        <div class="image-scanline"></div>
+                    <div class="skill-tags">
+                        <span class="tag">Java</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">C</span>
                     </div>
                 </div>
-            </section>
 
-            <section id="skills" class="content-section">
-                <h2 class="section-title" data-text="[ Core Skill Modules ]">[ Core Skill Modules ]</h2>
-                <div id="skills-grid" class="skills-grid">
-                    
-                </div>
-            </section>
-
-            <section id="projects" class="content-section">
-                <h2 class="section-title" data-text="[ Project Archives ]">[ Project Archives ]</h2>
-                <div id="projects-grid" class="projects-grid">
-                </div>
-            </section>
-
-            <section id="contact" class="content-section">
-                <h2 class="section-title" data-text="[ Establish Com_Link ]">[ Establish Com_Link ]</h2>
-                <div class="contact-container">
-                    <p class="contact-brief">> System online and awaiting new directives. Open to collaboration, complex problem-solving, and ambitious projects. All communication channels are encrypted.</p>
-                    <div class="contact-links">
-                        <a href="mailto:utkarshishu2627@gmail.com" class="contact-link" data-text="[ Initiate Email ]">[ Initiate Email ]</a>
-                        <a href="https://github.com/Utkarsh-patel26" target="_blank" class="contact-link" data-text="[ Access GitHub ]">[ Access GitHub ]</a>
-                        <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" class="contact-link" data-text="[ View LinkedIn ]">[ View LinkedIn ]</a>
-                        <a href="Resume.pdf" download="Utkarsh_Patel_Resume.pdf" class="contact-link resume-link" data-text="[ Download Resume ]">[ Download Payload ]</a>
+                <!-- Frameworks -->
+                <div class="skill-card stagger-1">
+                    <div class="skill-title">
+                        <span class="skill-icon">⚡</span> Frameworks
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Spring Boot</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">Flask</span>
                     </div>
                 </div>
-            </section>
-        </main>
-    </div>
+
+                <!-- Tools -->
+                <div class="skill-card stagger-2">
+                    <div class="skill-title">
+                        <span class="skill-icon">🛠️</span> Tools
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Maven</span>
+                        <span class="tag">Postman</span>
+                        <span class="tag">VS Code</span>
+                    </div>
+                </div>
+
+                <!-- Concepts -->
+                <div class="skill-card stagger-3">
+                    <div class="skill-title">
+                        <span class="skill-icon">🧠</span> Concepts
+                    </div>
+                    <div class="skill-tags">
+                        <span class="tag">Data Structures</span>
+                        <span class="tag">Algorithms</span>
+                        <span class="tag">System Design</span>
+                        <span class="tag">REST APIs</span>
+                        <span class="tag">Database Design</span>
+                        <span class="tag">Microservices</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1: PeerNexus -->
+                <!-- Project 1: PeerNexus -->
+                <article class="project-card fade-in-up">
+                    <div class="project-header">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="PeerNexus" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">PeerNexus</h3>
+                        <p class="project-desc">A collaborative peer-to-peer interaction platform designed to streamline communication, resource sharing, and academic collaboration. Focused on scalable backend architecture and clean UI design to ensure seamless real-time engagement between users.</p>
+                        
+                        <div class="project-meta">
+                            <div class="metric-item">Full BitTorrent Protocol implementation</div>
+                            <div class="metric-item">Decentralized peer discovery (DHT & PEX)</div>
+                            <div class="metric-item">Smart bandwidth & piece selection algorithms</div>
+                        </div>
+
+                        <div class="project-tech-stack">
+                            <span>Java</span> <span>JavaFX</span> <span>Maven</span> <span>Networking</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/Utkarsh-patel26/PeerNexus" target="_blank" class="link-btn">GitHub ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: Lumen -->
+                <article class="project-card fade-in-up stagger-1">
+                    <div class="project-header">
+                        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=800&q=80" alt="Lumen" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Lumen</h3>
+                        <p class="project-desc">A modern web-based platform built to deliver an intuitive and responsive user experience. Designed with performance optimization and structured component architecture, emphasizing clean code practices and maintainable development workflows.</p>
+                        
+                        <div class="project-meta">
+                            <div class="metric-item">Secure JWT Authentication & RBAC</div>
+                            <div class="metric-item">Real-time stats dashboard</div>
+                            <div class="metric-item">Efficient content delivery system</div>
+                        </div>
+
+                        <div class="project-tech-stack">
+                            <span>React</span> <span>Node.js</span> <span>MongoDB</span> <span>Vite</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/Utkarsh-patel26/Lumen" target="_blank" class="link-btn">GitHub ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3: HALEM-PEGASIS -->
+                <article class="project-card fade-in-up stagger-2">
+                    <div class="project-header">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="HALEM-PEGASIS Evaluator" class="project-img">
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">HALEM-PEGASIS Evaluator</h3>
+                        <p class="project-desc">A simulation and evaluation tool for analyzing energy-efficient routing in Wireless Sensor Networks using the HALEM and PEGASIS protocols. Implements algorithmic logic with real-time visualization to study network performance and optimization efficiency.</p>
+                        
+                        <div class="project-meta">
+                            <div class="metric-item">Reduced routing computation time by 35%</div>
+                            <div class="metric-item">Real-time network topology visualization</div>
+                            <div class="metric-item">Modular protocol integration architecture</div>
+                        </div>
+
+                        <div class="project-tech-stack">
+                            <span>Java</span> <span>Swing</span> <span>Algorithms</span> <span>Simulation</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/Utkarsh-patel26/halem-pegasis-evaluator" target="_blank" class="link-btn">GitHub ↗</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container fade-in-up">
+            <div class="contact-wrapper">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="contact-text">
+                    I'm currently looking for new opportunities as a Software Engineer. 
+                    Whether you have a question or just want to discuss technology, feel free to reach out.
+                </p>
+                
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="mailto:utkarshishu2627@gmail.com" class="btn btn-primary">
+                        Say Hello 👋
+                    </a>
+                    <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" class="btn btn-outline">
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/Utkarsh-patel26" target="_blank" class="btn btn-outline">
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
