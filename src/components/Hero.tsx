@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, TerminalSquare } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 import orb from "@/assets/orb.png";
 
-const ROLES = ["Web Developer", "AI Enthusiast", "Backend Engineer", "IT Student"];
+const ROLES = ["Software Engineer", "Web Developer", "AI Enthusiast", "Backend Engineer"];
 
 export const Hero = () => {
   const [text, setText] = useState("");
@@ -138,6 +138,20 @@ export const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* CLI floating button */}
+      <button
+        type="button"
+        aria-label="Try my CLI"
+        className="fixed bottom-8 right-6 z-40 group flex flex-col items-end gap-2"
+      >
+        <span className="px-3 py-1.5 rounded-xl bg-gradient-primary text-primary-foreground text-xs font-semibold shadow-soft animate-float">
+          Try my CLI! 🚀
+        </span>
+        <span className="w-12 h-12 rounded-full bg-background/80 backdrop-blur border border-primary/40 flex items-center justify-center glow-primary group-hover:scale-110 transition">
+          <TerminalSquare className="w-5 h-5 text-foreground" />
+        </span>
+      </button>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
