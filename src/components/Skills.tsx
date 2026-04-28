@@ -1,15 +1,14 @@
-import { Code2, Database, Wrench, Globe2, Languages } from "lucide-react";
+import { Code2, Database, Wrench, Boxes, Languages } from "lucide-react";
 
 const groups = [
-  { icon: Code2, title: "Web Technologies", items: ["HTML", "CSS", "React.js", "Bootstrap", "Node.js"] },
-  { icon: Database, title: "Databases", items: ["MongoDB"] },
-  { icon: Wrench, title: "Tools & Platforms", items: ["Git", "GitHub", "Firebase", "VS Code"] },
-  { icon: Globe2, title: "Domains", items: ["Frontend Development", "Backend Fundamentals", "API Integration", "AI Applications"] },
-  { icon: Languages, title: "Languages", items: ["Python", "Java", "JavaScript", "SQL"] },
+  { icon: Languages, title: "Languages", items: ["Java", "Python", "JavaScript", "SQL"] },
+  { icon: Boxes, title: "Frameworks", items: ["Spring Boot", "React", "Node.js", "Express", "Flask", "Celery"] },
+  { icon: Database, title: "Databases & Caching", items: ["MongoDB", "Redis"] },
+  { icon: Wrench, title: "Tools", items: ["Docker", "Git", "Maven", "n8n"] },
+  { icon: Code2, title: "Domains", items: ["Backend Engineering", "Distributed Systems", "API Design", "Automation"] },
 ];
 
 export const Skills = () => {
-  // duplicate for seamless marquee
   const loop = [...groups, ...groups];
 
   return (
@@ -22,7 +21,7 @@ export const Skills = () => {
           <span className="text-gradient">Skills</span>
         </h2>
         <p className="section-sub">
-          A showcase of my technical expertise and the tools I use to bring ideas to life.
+          A showcase of my technical expertise and the tools I use to build scalable systems.
         </p>
 
         <div className="relative overflow-hidden mask-fade">

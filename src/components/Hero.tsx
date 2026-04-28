@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, TerminalSquare } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 import orb from "@/assets/orb.png";
 
-const ROLES = ["Software Engineer", "Web Developer", "AI Enthusiast", "Backend Engineer"];
+const ROLES = ["Software Engineer", "Backend Developer", "Distributed Systems Enthusiast", "CS Undergrad"];
 
 export const Hero = () => {
   const [text, setText] = useState("");
@@ -84,7 +84,7 @@ export const Hero = () => {
 
           <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-4">
             Hi! I'm{" "}
-            <span className="text-foreground">Naveen Kumar</span>
+            <span className="text-foreground">Utkarsh Patel</span>
           </h1>
 
           <div className="text-4xl md:text-5xl font-bold text-gradient h-16 mb-6">
@@ -93,8 +93,8 @@ export const Hero = () => {
           </div>
 
           <p className="text-lg text-muted-foreground max-w-lg mb-10">
-            Information Technology student focused on AI applications, backend engineering,
-            and modern web development.
+            Computer Science undergraduate at RIT Bangalore with hands-on experience in
+            backend engineering, distributed systems, and real-world software development.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -108,10 +108,11 @@ export const Hero = () => {
               </span>
             </a>
             <a
-              href="#contact"
-              className="inline-flex items-center px-7 py-3 rounded-full border border-primary/60 font-semibold hover:bg-primary/10 transition"
+              href="/Utkarsh_Patel_Resume.pdf"
+              download
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-primary/60 font-semibold hover:bg-primary/10 transition"
             >
-              Save Contact
+              <Download className="w-4 h-4" /> Download Resume
             </a>
           </div>
         </div>
@@ -130,7 +131,7 @@ export const Hero = () => {
             <div className="absolute inset-0 bg-gradient-glow blur-3xl scale-110" />
             <img
               src={avatar}
-              alt="Naveen Kumar pixel art portrait"
+              alt="Utkarsh Patel pixel art portrait"
               width={420}
               height={420}
               className="relative w-72 md:w-[420px] drop-shadow-[0_0_40px_hsl(var(--primary)/0.4)] animate-float"
@@ -138,20 +139,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-
-      {/* CLI floating button */}
-      <button
-        type="button"
-        aria-label="Try my CLI"
-        className="fixed bottom-8 right-6 z-40 group flex flex-col items-end gap-2"
-      >
-        <span className="px-3 py-1.5 rounded-xl bg-gradient-primary text-primary-foreground text-xs font-semibold shadow-soft animate-float">
-          Try my CLI! 🚀
-        </span>
-        <span className="w-12 h-12 rounded-full bg-background/80 backdrop-blur border border-primary/40 flex items-center justify-center glow-primary group-hover:scale-110 transition">
-          <TerminalSquare className="w-5 h-5 text-foreground" />
-        </span>
-      </button>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
