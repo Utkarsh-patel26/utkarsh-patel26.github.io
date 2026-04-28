@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, TerminalSquare } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 import orb from "@/assets/orb.png";
 
