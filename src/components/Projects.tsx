@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { ExternalLink, Wrench } from "lucide-react";
 
-const main = [
+type Project = {
+  title: string;
+  desc: string;
+  stack: string[];
+  badge?: string;
+  link?: string;
+};
+
+const main: Project[] = [
   {
     title: "AI-Powered Learning Tutor",
-    badge: "🔧 Undergoing Project",
+    badge: "Undergoing Project",
     desc: "Adaptive AI tutor generating lessons, quizzes, and summaries based on learner level. Focused on caching and AI orchestration.",
     stack: ["React", "Node.js", "Firebase", "Gemini 2.0", "Llama 3.1"],
   },
@@ -21,7 +29,7 @@ const main = [
   },
 ];
 
-const mini = [
+const mini: Project[] = [
   { title: "Portfolio Generator", desc: "CLI to scaffold portfolios with a configurable theme.", stack: ["Node.js"] },
   { title: "Quiz Engine", desc: "Lightweight quiz UI with adaptive difficulty levels.", stack: ["React"] },
   { title: "Markdown Notes", desc: "Local-first markdown notes app with tags and search.", stack: ["React", "IndexedDB"] },
@@ -67,7 +75,7 @@ export const Projects = () => {
             >
               {p.badge && (
                 <span className="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary-foreground border border-secondary/40 mb-4">
-                  <Wrench className="w-3 h-3" /> {p.badge.replace("🔧 ", "")}
+                  <Wrench className="w-3 h-3" /> {p.badge}
                 </span>
               )}
               <h3 className="text-xl font-bold mb-2 group-hover:text-gradient transition">
@@ -86,7 +94,7 @@ export const Projects = () => {
                 ))}
               </div>
 
-              {"link" in p && p.link && (
+              {p.link && (
                 <a
                   href={p.link}
                   target="_blank"
