@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Wrench } from "lucide-react";
+import { ExternalLink, Award } from "lucide-react";
 
 type Project = {
   title: string;
@@ -7,51 +7,86 @@ type Project = {
   stack: string[];
   badge?: string;
   link?: string;
+  bullets?: string[];
 };
 
 const main: Project[] = [
   {
-    title: "AI-Powered Learning Tutor",
-    badge: "Undergoing Project",
-    desc: "Adaptive AI tutor generating lessons, quizzes, and summaries based on learner level. Focused on caching and AI orchestration.",
-    stack: ["React", "Node.js", "Firebase", "Gemini 2.0", "Llama 3.1"],
+    title: "PeerNexus (Torrent Client)",
+    desc: "A BitTorrent-style peer-to-peer client enabling decentralized file sharing without centralized infrastructure.",
+    stack: ["Java", "Networking", "Multithreading"],
+    link: "https://github.com/",
+    bullets: [
+      "Implemented multithreaded socket communication to manage concurrent peer connections.",
+      "Designed core protocol logic: piece scheduling, choking/unchoking, and hash-based integrity verification.",
+    ],
   },
   {
-    title: "Anonymous Chat Web App",
-    desc: "Real-time anonymous messaging platform with guest login and responsive UI. Optimized message rendering.",
-    stack: ["React", "Firebase"],
-    link: "https://anonymouschat007.web.app/",
+    title: "HALEM-PEGASIS Evaluator",
+    desc: "Hierarchical enhancement to improve routing efficiency in wireless sensor networks, with full simulation system.",
+    stack: ["Java", "Swing", "Simulation"],
+    link: "https://github.com/",
+    bullets: [
+      "Analyzed network lifetime, node energy consumption, and routing performance.",
+      "Achieved 35% reduction in routing overhead via optimized leader selection and adaptive topology.",
+    ],
   },
   {
-    title: "Medicine Reminder App",
-    desc: "Cross-platform mobile app with scheduled notifications and persistent reminder tracking using Capacitor.",
-    stack: ["React", "Capacitor", "Local Notifications"],
+    title: "Lumen (Course Platform)",
+    desc: "Full-stack platform for course discovery, enrollment, and instructor management.",
+    stack: ["Node.js", "MongoDB", "Express", "REST"],
+    link: "https://github.com/",
+    bullets: [
+      "Implemented secure authentication, role-based access control, and REST APIs.",
+      "Optimized database queries and backend performance for concurrent users with low latency.",
+    ],
   },
 ];
 
-const mini: Project[] = [
-  { title: "Portfolio Generator", desc: "CLI to scaffold portfolios with a configurable theme.", stack: ["Node.js"] },
-  { title: "Quiz Engine", desc: "Lightweight quiz UI with adaptive difficulty levels.", stack: ["React"] },
-  { title: "Markdown Notes", desc: "Local-first markdown notes app with tags and search.", stack: ["React", "IndexedDB"] },
+const achievements: Project[] = [
+  {
+    title: "Research Publication — ICDDS '25",
+    badge: "Publication",
+    desc: "Published paper on Explainable CNN for lung disease classification at ICDDS '25.",
+    stack: ["Deep Learning", "CNN", "Explainable AI"],
+  },
+  {
+    title: "Gold Medalist — Taekwondo (National)",
+    badge: "Award",
+    desc: "Won gold medal at National Level Taekwondo (2021), demonstrating discipline and competitive excellence.",
+    stack: ["Discipline", "Athletics"],
+  },
+  {
+    title: "ISAI-DT '24 Conference Presentation",
+    badge: "Talk",
+    desc: "Presented research on automated legal text information extraction at ISAI-DT '24.",
+    stack: ["NLP", "Information Extraction"],
+  },
+  {
+    title: "Ghost Hackathon Participant",
+    badge: "Hackathon",
+    desc: "Participated in Ghost Hackathon by FOSS United and Tech4Community, building a functional solution under time constraints.",
+    stack: ["FOSS", "Rapid Prototyping"],
+  },
 ];
 
 export const Projects = () => {
-  const [tab, setTab] = useState<"main" | "mini">("main");
-  const list = tab === "main" ? main : mini;
+  const [tab, setTab] = useState<"main" | "achievements">("main");
+  const list = tab === "main" ? main : achievements;
 
   return (
     <section id="projects" className="relative py-24">
       <div className="container">
         <h2 className="section-heading">
-          <span className="text-gradient">Projects</span>
+          <span className="text-gradient">Projects & Achievements</span>
         </h2>
         <p className="section-sub">
-          A selection of my recent works, ranging from complex full-stack applications to focused technical experiments.
+          A selection of my recent works and recognitions across software engineering and research.
         </p>
 
         <div className="flex justify-center mb-12">
           <div className="inline-flex p-1 rounded-full glass-card">
-            {(["main", "mini"] as const).map((t) => (
+            {(["main", "achievements"] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -61,7 +96,7 @@ export const Projects = () => {
                     : "text-foreground/70 hover:text-foreground"
                 }`}
               >
-                {t === "main" ? "Main Projects" : "Mini Projects"}
+                {t === "main" ? "Projects" : "Achievements"}
               </button>
             ))}
           </div>
@@ -75,13 +110,24 @@ export const Projects = () => {
             >
               {p.badge && (
                 <span className="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full bg-secondary/20 text-secondary-foreground border border-secondary/40 mb-4">
-                  <Wrench className="w-3 h-3" /> {p.badge}
+                  <Award className="w-3 h-3" /> {p.badge}
                 </span>
               )}
               <h3 className="text-xl font-bold mb-2 group-hover:text-gradient transition">
                 {p.title}
               </h3>
-              <p className="text-sm text-muted-foreground mb-5">{p.desc}</p>
+              <p className="text-sm text-muted-foreground mb-4">{p.desc}</p>
+
+              {p.bullets && (
+                <ul className="space-y-1.5 text-xs text-muted-foreground mb-5">
+                  {p.bullets.map((b) => (
+                    <li key={b} className="flex gap-2">
+                      <span className="text-primary mt-0.5">▸</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               <div className="flex flex-wrap gap-2 mb-5">
                 {p.stack.map((s) => (
@@ -101,7 +147,7 @@ export const Projects = () => {
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-gradient hover:opacity-80"
                 >
-                  Live Demo <ExternalLink className="w-3.5 h-3.5" />
+                  GitHub <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}
             </article>

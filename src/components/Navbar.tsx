@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Linkedin, Instagram, Github } from "lucide-react";
+import { Menu, X, Linkedin, Github, Code2 } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 
 const links = [
@@ -30,7 +30,7 @@ export const Navbar = () => {
         <a href="#home" className="flex items-center gap-2">
           <img
             src={avatar}
-            alt="Naveen Kumar avatar"
+            alt="Utkarsh Patel avatar"
             width={48}
             height={48}
             className="w-12 h-12 rounded-full object-cover border-2 border-primary/40 glow-primary"
@@ -52,20 +52,21 @@ export const Navbar = () => {
         </ul>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn"
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn"
             className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-muted/50 transition">
             <Linkedin className="w-4 h-4" />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-muted/50 transition">
-            <Instagram className="w-4 h-4" />
-          </a>
-          <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub"
+          <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub"
             className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-muted/50 transition">
             <Github className="w-4 h-4" />
           </a>
+          <a href="https://leetcode.com/" target="_blank" rel="noreferrer" aria-label="LeetCode"
+            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-muted/50 transition">
+            <Code2 className="w-4 h-4" />
+          </a>
           <a
-            href="#contact"
+            href="/Utkarsh_Patel_Resume.pdf"
+            download
             className="px-5 py-2 rounded-full border border-primary/60 text-sm font-semibold hover:bg-primary/10 transition"
           >
             Download CV

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, Linkedin, Instagram, Github, Mail } from "lucide-react";
+import { Send, Linkedin, Github, Mail, Phone, MapPin, Code2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export const Contact = () => {
@@ -25,21 +25,31 @@ export const Contact = () => {
                 Let's Build <span className="text-gradient">Something Great</span>
               </h2>
               <p className="text-muted-foreground mb-8">
-                Feel free to reach out for collaborations or just a friendly hello.
+                Open to internships, collaborations, and interesting backend / distributed systems problems.
               </p>
 
               <div className="space-y-3 mb-8">
-                <a href="mailto:hello@naveenkumarp.me" className="flex items-center gap-3 text-sm hover:text-foreground text-foreground/80">
-                  <Mail className="w-4 h-4 text-primary" /> hello@naveenkumarp.me
+                <a href="mailto:utkarsh@example.com" className="flex items-center gap-3 text-sm hover:text-foreground text-foreground/80">
+                  <Mail className="w-4 h-4 text-primary" /> utkarsh@example.com
                 </a>
+                <a href="tel:+916307816747" className="flex items-center gap-3 text-sm hover:text-foreground text-foreground/80">
+                  <Phone className="w-4 h-4 text-primary" /> +91 63078 16747
+                </a>
+                <div className="flex items-center gap-3 text-sm text-foreground/80">
+                  <MapPin className="w-4 h-4 text-primary" /> Bangalore, India
+                </div>
               </div>
 
               <div className="flex gap-3">
-                {[Linkedin, Instagram, Github].map((Icon, i) => (
-                  <a key={i} href="#" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 transition">
-                    <Icon className="w-4 h-4" />
-                  </a>
-                ))}
+                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 transition">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a href="https://github.com/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 transition">
+                  <Github className="w-4 h-4" />
+                </a>
+                <a href="https://leetcode.com/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 transition">
+                  <Code2 className="w-4 h-4" />
+                </a>
               </div>
             </div>
 
@@ -79,7 +89,7 @@ export const Contact = () => {
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-10">
-          © {new Date().getFullYear()} Naveen Kumar P. Crafted with passion.
+          © {new Date().getFullYear()} Utkarsh Patel. Crafted with passion.
         </p>
       </div>
     </section>
