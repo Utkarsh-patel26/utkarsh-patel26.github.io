@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 import orb from "@/assets/orb.png";
 
-const ROLES = ["Web Developer", "AI Enthusiast", "Backend Engineer", "IT Student"];
+const ROLES = ["Software Engineer", "Web Developer", "AI Enthusiast", "Backend Engineer"];
 
 export const Hero = () => {
   const [text, setText] = useState("");
