@@ -1,4 +1,11 @@
-import { Briefcase } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 const items = [
   {
@@ -34,53 +41,81 @@ const items = [
 ];
 
 export const Experience = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (!api) return;
+
+    if (isHovered) return;
+
+    const timer = setInterval(() => {
+      api.scrollNext();
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [api, isHovered]);
+
   return (
     <section id="experience" className="relative py-24">
       <div className="container">
-        <h2 className="section-heading">
-          <span className="text-gradient">Experience</span>
-        </h2>
-        <p className="section-sub">My professional journey, internships, and leadership roles.</p>
+        <div 
+          className="glass-card rounded-[2rem] p-8 md:p-14 max-w-5xl mx-auto relative overflow-hidden"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-3 text-white tracking-tight" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            Experience
+          </h2>
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12 text-sm md:text-base">
+            My professional journey and internship experiences.
+          </p>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-secondary/40 to-transparent md:-translate-x-1/2" />
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full relative px-2 md:px-6"
+          >
+            {/* Custom Arrows mapping directly to api */}
+            <button 
+              onClick={() => api?.scrollPrev()}
+              className="absolute left-0 md:-left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#1a1a1e] border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white hover:scale-110 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.4)] transition-all duration-300 active:scale-95 shadow-xl"
+              aria-label="Previous experience"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
 
-          <div className="space-y-12">
-            {items.map((it, i) => (
-              <div
-                key={i}
-                className={`relative flex flex-col md:flex-row gap-6 ${
-                  i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                }`}
-              >
-                <div className="absolute left-4 md:left-1/2 top-6 w-4 h-4 rounded-full bg-gradient-primary border-4 border-background -translate-x-1/2 glow-primary z-10" />
+            <button 
+              onClick={() => api?.scrollNext()}
+              className="absolute right-0 md:-right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#1a1a1e] border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white hover:scale-110 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.4)] transition-all duration-300 active:scale-95 shadow-xl"
+              aria-label="Next experience"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
 
-                <div className="md:w-1/2 pl-12 md:pl-0 md:px-8">
-                  <div className="glass-card rounded-3xl p-7 hover:border-primary/60 transition">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center">
-                        <Briefcase className="w-5 h-5 text-primary-foreground" />
-                      </div>
-                      <span className="text-xs font-semibold tracking-wider text-muted-foreground">
-                        {it.period}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold mb-1">{it.role}</h3>
-                    <h4 className="text-sm font-semibold text-gradient mb-4">{it.company}</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      {it.bullets.map((b, j) => (
-                        <li key={j} className="flex gap-2">
-                          <span className="text-primary mt-1">▸</span>
+            <CarouselContent className="-ml-4 md:-ml-6">
+              {items.map((item, i) => (
+                <CarouselItem key={i} className="pl-4 md:pl-6 basis-full md:basis-1/2">
+                  <div className="glass-card rounded-[1.5rem] p-8 md:p-10 border border-white/10 bg-[#1e1e24]/40 hover:border-primary/60 hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_0_30px_hsl(320_90%_60%_/_0.3)] transition-all duration-300 ease-out h-full">
+                    <h3 className="text-xl md:text-2xl font-bold mb-1 text-white">{item.role}</h3>
+                    <h4 className="text-[13px] md:text-sm font-bold text-primary mb-3 uppercase tracking-widest">{item.company}</h4>
+                    <div className="text-[13px] text-gray-400 mb-5 font-medium">{item.period}</div>
+                    <ul className="space-y-3 text-[13px] md:text-[14px] text-gray-300 leading-relaxed">
+                      {item.bullets.map((b, j) => (
+                        <li key={j} className="flex gap-3 items-start">
+                          <span className="mt-[7px] w-[5px] h-[5px] rounded-full bg-gray-400 shrink-0 border border-gray-400" />
                           <span>{b}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                </div>
-                <div className="hidden md:block md:w-1/2" />
-              </div>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
     </section>

@@ -1,11 +1,13 @@
-import { Code2, Database, Wrench, Boxes, Languages } from "lucide-react";
+import { Code2, Database, Wrench, Boxes, Languages, Cpu, BrainCircuit } from "lucide-react";
 
 const groups = [
-  { icon: Languages, title: "Languages", items: ["Java", "Python", "JavaScript", "SQL"] },
-  { icon: Boxes, title: "Frameworks", items: ["Spring Boot", "React", "Node.js", "Express", "Flask", "Celery"] },
-  { icon: Database, title: "Databases & Caching", items: ["MongoDB", "Redis"] },
-  { icon: Wrench, title: "Tools", items: ["Docker", "Git", "Maven", "n8n"] },
-  { icon: Code2, title: "Domains", items: ["Backend Engineering", "Distributed Systems", "API Design", "Automation"] },
+  { icon: Languages, title: "Languages", items: ["Java (Primary)", "Python", "JavaScript", "SQL"] },
+  { icon: Boxes, title: "Frameworks & Backend", items: ["Spring Boot", "Node.js", "Express.js", "Flask", "REST APIs", "JWT", "Microservices"] },
+  { icon: Cpu, title: "Systems & Core Eng", items: ["Distributed Systems (Raft)", "DB Internals (B+ Trees, WAL)", "JVM Internals & JIT", "Concurrency", "P2P Networking"] },
+  { icon: Database, title: "Databases & Caching", items: ["MongoDB", "Redis", "Custom Storage Engines", "Indexing", "Query Optimization"] },
+  { icon: Wrench, title: "DevOps & Tools", items: ["Docker & Compose", "Git", "Maven", "Nginx", "GitHub Actions", "Linux"] },
+  { icon: BrainCircuit, title: "Data / AI / ML", items: ["NLP", "Transformers", "LSTM-GAN", "Classification (SVM, XGBoost)", "Feature Engineering"] },
+  { icon: Code2, title: "Domains", items: ["Backend Engineering", "Distributed Systems", "Database Systems", "Compiler Design", "API Design", "Automation"] },
 ];
 
 export const Skills = () => {
@@ -13,7 +15,7 @@ export const Skills = () => {
 
   return (
     <section id="skills" className="relative py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background" />
+      {/* Background gradient removed to allow global cosmos bg to show */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-gradient-glow blur-3xl opacity-60 pointer-events-none" />
 
       <div className="container relative z-10">
@@ -31,7 +33,7 @@ export const Skills = () => {
               return (
                 <div
                   key={i}
-                  className="glass-card rounded-3xl p-8 min-w-[300px] md:min-w-[340px] hover:border-primary/60 transition-all hover:-translate-y-1 group"
+                  className="glass-card rounded-3xl p-8 min-w-[300px] md:min-w-[340px] hover:border-primary/60 hover:-translate-y-1.5 hover:scale-[1.02] hover:shadow-[0_0_30px_hsl(320_90%_60%_/_0.3)] transition-all duration-300 ease-out group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-gradient-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                     <Icon className="w-7 h-7 text-primary-foreground" />

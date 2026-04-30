@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, ChevronRight, TerminalSquare } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 import orb from "@/assets/orb.png";
 
-const ROLES = ["Software Engineer", "Backend Developer", "Distributed Systems Enthusiast", "CS Undergrad"];
+const ROLES = ["Software Engineer", "Backend Developer", "CS Undergrad"];
 
 export const Hero = () => {
   const [text, setText] = useState("");
@@ -31,120 +31,83 @@ export const Hero = () => {
     return () => clearTimeout(timer);
   }, [text, deleting, current]);
 
-  const stars = useMemo(
-    () => Array.from({ length: 80 }, () => ({
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      size: Math.random() * 2 + 1,
-      delay: Math.random() * 4,
-    })),
-    []
-  );
-
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-cosmos pt-32 pb-20">
-      {/* Stars */}
-      <div className="absolute inset-0 pointer-events-none">
-        {stars.map((s, i) => (
-          <span
-            key={i}
-            className="absolute rounded-full bg-white animate-twinkle"
-            style={{
-              top: `${s.top}%`,
-              left: `${s.left}%`,
-              width: s.size,
-              height: s.size,
-              animationDelay: `${s.delay}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Shooting stars */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[0, 1, 2].map((i) => (
-          <div
-            key={i}
-            className="absolute h-px w-32 bg-gradient-to-r from-transparent via-cyan-300 to-transparent animate-shoot"
-            style={{
-              top: `${10 + i * 20}%`,
-              left: `-10%`,
-              animationDelay: `${i * 3}s`,
-            }}
-          />
-        ))}
-      </div>
-
+    <section id="home" className="relative min-h-screen pt-32 pb-20 bg-cosmos">
       <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center">
         <div className="animate-fade-up">
-          <span className="pill border-primary/40 bg-primary/5 text-foreground/90 mb-6">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="inline-block px-5 py-2 rounded-[30px] border border-white/20 bg-black/20 text-white/90 text-sm font-bold tracking-[0.1em] mb-8">
             WELCOME TO MY PORTFOLIO
           </span>
 
-          <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-4">
-            Hi! I'm{" "}
-            <span className="text-foreground">Utkarsh Patel</span>
+          <h1 className="text-5xl md:text-[4rem] font-extrabold leading-[1.05] mb-2 tracking-tight text-white">
+            Hi! I'm Utkarsh Patel
           </h1>
 
-          <div className="text-4xl md:text-5xl font-bold text-gradient h-16 mb-6">
+          <div className="text-5xl md:text-[4rem] font-extrabold text-[#b92b6a] h-20 mb-8 tracking-tight">
             {text}
-            <span className="inline-block w-1 h-10 bg-primary ml-1 animate-pulse align-middle" />
           </div>
 
-          <p className="text-lg text-muted-foreground max-w-lg mb-10">
+          <p className="text-gray-400 text-lg max-w-xl mb-12">
             Computer Science undergraduate at RIT Bangalore with hands-on experience in
             backend engineering, distributed systems, and real-world software development.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap items-center gap-5">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-gradient-primary text-primary-foreground font-semibold shadow-soft hover:scale-105 transition-transform"
+              className="group inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-gradient-to-r from-[#b92b6a] via-[#7534d0] to-[#5136b8] text-white font-semibold hover:-translate-y-1 hover:scale-105 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.4)] transition-all duration-300 active:scale-95"
             >
-              Let's Connect
-              <span className="w-10 h-10 rounded-full bg-background/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+              <span className="text-sm">Let's Connect</span>
+              <span className="w-8 h-8 rounded-full border border-white/70 flex items-center justify-center">
                 <ArrowRight className="w-4 h-4" />
               </span>
             </a>
             <a
               href="/Utkarsh_Patel_Resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-primary/60 font-semibold hover:bg-primary/10 transition"
+              className="inline-flex items-center justify-center px-7 py-3 rounded-[30px] border border-white/30 text-sm font-semibold text-white bg-transparent hover:bg-white/5 hover:-translate-y-1 hover:scale-105 hover:border-primary/50 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.2)] transition-all duration-300 active:scale-95"
             >
-              <Download className="w-4 h-4" /> Download Resume
+              Save Contact
             </a>
+
           </div>
         </div>
 
-        {/* Right: avatar + orb */}
-        <div className="relative flex justify-center items-center">
-          <img
-            src={orb}
-            alt=""
-            aria-hidden
-            width={200}
-            height={200}
-            className="absolute -top-4 left-1/4 w-44 h-44 animate-float opacity-90"
-          />
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-glow blur-3xl scale-110" />
+        {/* Right: avatar */}
+        <div className="relative flex justify-center lg:justify-end lg:ml-32 items-end group lg:translate-y-32">
+          {/* Avatar (Animated float: moves 20px up and back infinitely) */}
+          <div className="relative z-10 animate-float transition-transform duration-500">
+            {/* Aura Background */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] rounded-full bg-gradient-to-tr from-[#b92b6a]/80 to-[#5136b8]/80 blur-[60px] md:blur-[80px] -z-10" />
             <img
               src={avatar}
               alt="Utkarsh Patel pixel art portrait"
-              width={420}
-              height={420}
-              className="relative w-72 md:w-[420px] drop-shadow-[0_0_40px_hsl(var(--primary)/0.4)] animate-float"
+              className="relative z-10 w-[18rem] md:w-[28rem] drop-shadow-[0_0_30px_rgba(170,54,124,0.4)]"
             />
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground">
-        <span>Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent" />
+      {/* Floating CLI widget */}
+      <div 
+        className="fixed bottom-8 right-8 z-[10001] flex flex-col items-center gap-3 animate-fade-up cursor-pointer group"
+        onClick={() => {
+          if ((window as any).openTerminal) {
+            (window as any).openTerminal();
+          } else {
+            window.dispatchEvent(new CustomEvent('open-terminal'));
+          }
+        }}
+      >
+        <div className="bg-[#b92b6a] text-white text-xs font-bold px-4 py-2 rounded-full shadow-[0_0_20px_rgba(185,43,106,0.4)] group-hover:scale-105 transition-transform flex items-center gap-1.5">
+          Try my CLI! 🚀
+          <div className="absolute right-[22px] -bottom-[6px] w-3 h-3 bg-[#b92b6a] rotate-45 transform origin-center"></div>
+        </div>
+        <button className="w-12 h-12 bg-[#332f42] border border-white/20 rounded-full flex items-center justify-center text-white/90 shadow-[0_0_15px_rgba(185,43,106,0.3)] group-hover:scale-110 group-hover:bg-[#b92b6a] transition-all duration-300 font-mono text-sm leading-none z-10 active:scale-95">
+          &gt;_
+        </button>
       </div>
+
     </section>
   );
 };

@@ -26,48 +26,56 @@ export const Navbar = () => {
         scrolled ? "py-2 bg-background/70 backdrop-blur-xl border-b border-border" : "py-4"
       }`}
     >
-      <nav className="container flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2">
-          <img
-            src={avatar}
-            alt="Utkarsh Patel avatar"
-            width={48}
-            height={48}
-            className="w-12 h-12 rounded-full object-cover border-2 border-primary/40 glow-primary"
-          />
+      <nav className="max-w-[1400px] w-full mx-auto px-6 md:px-12 flex items-center justify-between">
+        <a href="#home" className="flex items-center">
+          <div className="w-[52px] h-[52px] rounded-full border-[1.5px] border-white/90 p-[2px] flex items-center justify-center hover:opacity-90 transition-opacity">
+            <img
+              src={avatar}
+              alt="Utkarsh Patel avatar"
+              className="w-full h-full rounded-full object-cover"
+            />
+          </div>
         </a>
 
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex flex-1 items-center justify-center gap-8 lg:gap-14 ml-4 lg:ml-12">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="text-sm font-semibold tracking-widest uppercase text-foreground/80 hover:text-foreground transition-colors relative group"
+                className="text-[13px] font-bold tracking-[0.1em] uppercase text-white hover-glitch-pink inline-block"
               >
                 {l.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300" />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="hidden md:flex items-center gap-3">
-          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn"
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-muted/50 transition">
-            <Linkedin className="w-4 h-4" />
+        <div className="hidden md:flex items-center gap-4">
+          <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" rel="noreferrer" aria-label="LinkedIn"
+            className="w-[42px] h-[42px] rounded-full border-[1.5px] border-white/90 flex items-center justify-center text-white hover:bg-white/20 transition">
+            <span className="text-[14px] font-bold leading-none">in</span>
           </a>
-          <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub"
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-muted/50 transition">
-            <Github className="w-4 h-4" />
-          </a>
-          <a href="https://leetcode.com/" target="_blank" rel="noreferrer" aria-label="LeetCode"
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-muted/50 transition">
-            <Code2 className="w-4 h-4" />
+          <a href="https://instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram"
+            className="w-[42px] h-[42px] rounded-full border-[1.5px] border-white/90 flex items-center justify-center text-white hover:bg-white/20 transition">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="18" height="18" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
           </a>
           <a
             href="/Utkarsh_Patel_Resume.pdf"
             download
-            className="px-5 py-2 rounded-full border border-primary/60 text-sm font-semibold hover:bg-primary/10 transition"
+            className="px-7 py-[0.6rem] ml-2 rounded-full border-[1.5px] border-white/90 text-[14px] font-bold text-white bg-transparent hover:bg-white/10 transition-colors"
           >
             Download CV
           </a>

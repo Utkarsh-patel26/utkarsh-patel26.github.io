@@ -41,13 +41,13 @@ export const Contact = () => {
               </div>
 
               <div className="flex gap-3">
-                <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 transition">
+                <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 hover:-translate-y-1 hover:scale-110 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.3)] transition-all duration-300 active:scale-95">
                   <Linkedin className="w-4 h-4" />
                 </a>
-                <a href="https://github.com/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 transition">
+                <a href="https://github.com/Utkarsh-patel26" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 hover:-translate-y-1 hover:scale-110 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.3)] transition-all duration-300 active:scale-95">
                   <Github className="w-4 h-4" />
                 </a>
-                <a href="https://leetcode.com/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 transition">
+                <a href="https://leetcode.com/u/utkarshishu26/" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-primary/60 hover:-translate-y-1 hover:scale-110 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.3)] transition-all duration-300 active:scale-95">
                   <Code2 className="w-4 h-4" />
                 </a>
               </div>
@@ -80,7 +80,7 @@ export const Contact = () => {
               />
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-primary text-primary-foreground font-semibold hover:scale-105 transition"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-primary text-primary-foreground font-semibold hover:-translate-y-1 hover:scale-105 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.4)] transition-all duration-300 active:scale-95"
               >
                 Send <Send className="w-4 h-4" />
               </button>
@@ -88,9 +88,6 @@ export const Contact = () => {
           </div>
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-10">
-          © {new Date().getFullYear()} Utkarsh Patel. Crafted with passion.
-        </p>
       </div>
     </section>
   );

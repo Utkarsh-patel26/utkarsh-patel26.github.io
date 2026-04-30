@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bg-grad" x1="100%" y1="50%" x2="0%" y2="50%">
+      <stop offset="0%" stop-color="#040914"/> <!-- Dark navy -->
+      <stop offset="60%" stop-color="#08080f"/> <!-- Rich black-blue -->
+      <stop offset="100%" stop-color="#140a18"/> <!-- Deep subtle purple tint -->
+    </linearGradient>
+
+    <!-- Purple ambient glow on left -->
+    <radialGradient id="purple-glow" cx="10%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#4c1d66" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#4c1d66" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Blue ambient highlight near orb -->
+    <radialGradient id="blue-glow" cx="75%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#0a467a" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0a467a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Orb Core -->
+    <radialGradient id="orb-core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d4f8ff"/>
+      <stop offset="30%" stop-color="#4df0ff"/>
+      <stop offset="60%" stop-color="#00aeff"/>
+      <stop offset="100%" stop-color="#0062b3" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glowing Filters -->
+    <filter id="glow-heavy" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="35" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-light" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="meteor-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Subtle Grain/Noise Overlay -->
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 0.04 0" />
+    </filter>
+
+    <!-- Vignette -->
+    <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+      <stop offset="50%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.85"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 1. Background Layers -->
+  <rect width="100%" height="100%" fill="url(#bg-grad)"/>
+  <rect width="100%" height="100%" fill="url(#purple-glow)"/>
+  <rect width="100%" height="100%" fill="url(#blue-glow)"/>
+
+  <!-- 2. Star Field: sparse, realistic clustering -->
+  <g fill="#ffffff">
+    <circle cx="210" cy="180" r="1" opacity="0.8"/>
+    <circle cx="215" cy="190" r="0.6" opacity="0.5"/>
+    <circle cx="480" cy="90" r="1.4" opacity="0.6"/>
+    <circle cx="890" cy="270" r="0.8" opacity="0.9"/>
+    <circle cx="1250" cy="110" r="2" opacity="0.3"/>
+    <circle cx="1780" cy="210" r="1.2" opacity="0.7"/>
+    <circle cx="1810" cy="230" r="0.5" opacity="0.4"/>
+    <circle cx="250" cy="550" r="0.7" opacity="0.5"/>
+    <circle cx="620" cy="480" r="1.5" opacity="0.4"/>
+    <circle cx="1050" cy="680" r="1" opacity="0.8"/>
+    <circle cx="1450" cy="420" r="1.3" opacity="0.6"/>
+    <circle cx="1850" cy="590" r="0.9" opacity="0.9"/>
+    <circle cx="120" cy="850" r="1.8" opacity="0.4"/>
+    <circle cx="530" cy="950" r="1.1" opacity="0.7"/>
+    <circle cx="540" cy="930" r="0.5" opacity="0.6"/>
+    <circle cx="950" cy="890" r="0.6" opacity="0.5"/>
+    <circle cx="1350" cy="790" r="1.6" opacity="0.3"/>
+    <circle cx="1650" cy="980" r="1" opacity="0.8"/>
+    <circle cx="320" cy="320" r="1.4" opacity="0.5"/>
+    <circle cx="730" cy="190" r="0.8" opacity="0.9"/>
+    <circle cx="1150" cy="350" r="2" opacity="0.3"/>
+    <circle cx="1550" cy="240" r="1.1" opacity="0.7"/>
+    <circle cx="1950" cy="450" r="0.6" opacity="0.5"/>
+    <circle cx="820" cy="510" r="1" opacity="0.4"/>
+    <circle cx="1680" cy="710" r="1.2" opacity="0.8"/>
+  </g>
+
+  <!-- 3. Meteors (thin, top-left to bottom-right) -->
+  <g stroke="#2dd4bf" stroke-linecap="round" filter="url(#meteor-blur)">
+    <line x1="250" y1="80" x2="380" y2="210" stroke-width="1" opacity="0.5"/>
+    <line x1="850" y1="20" x2="1020" y2="190" stroke-width="1.5" opacity="0.3"/>
+    <line x1="1480" y1="120" x2="1590" y2="230" stroke-width="0.8" opacity="0.7"/>
+    <line x1="560" y1="650" x2="780" y2="870" stroke-width="1.2" opacity="0.2"/>
+    <line x1="1650" y1="520" x2="1880" y2="750" stroke-width="1" opacity="0.4"/>
+    <line x1="50" y1="350" x2="210" y2="510" stroke-width="1.5" opacity="0.3"/>
+  </g>
+
+  <!-- 4. Floating Orb + Rings (approx x: 72%, y: 35%) -->
+  <g transform="translate(1380, 380)">
+    <!-- Outer Energy Ring -->
+    <ellipse cx="0" cy="0" rx="160" ry="48" fill="none" stroke="#22d3ee" stroke-width="1.5" opacity="0.5" transform="rotate(-18)" filter="url(#glow-light)"/>
+    <!-- Faint inner trace -->
+    <ellipse cx="0" cy="0" rx="145" ry="42" fill="none" stroke="#22d3ee" stroke-width="0.5" opacity="0.25" transform="rotate(-18)"/>
+    
+    <!-- Neon Glow Base -->
+    <circle cx="0" cy="0" r="100" fill="#0284c7" opacity="0.25" filter="url(#glow-heavy)"/>
+    <!-- Brighter Mid Glow -->
+    <circle cx="0" cy="0" r="65" fill="#0ea5e9" opacity="0.4" filter="url(#glow-heavy)"/>
+    <!-- Bright Cyan Core -->
+    <circle cx="0" cy="0" r="35" fill="url(#orb-core)"/>
+  </g>
+
+  <!-- 5. Vignette Frame -->
+  <rect width="100%" height="100%" fill="url(#vignette)" pointer-events="none" style="mix-blend-mode: multiply;"/>
+
+  <!-- 6. Noise Overlay (top-most for raw texture) -->
+  <rect width="100%" height="100%" filter="url(#noise)" opacity="1" style="mix-blend-mode: overlay;" pointer-events="none"/>
+</svg>
