@@ -16,6 +16,7 @@ type Edge = {
   to: string;
 };
 
+// The real delivery pipeline of this site — every node here actually exists.
 const NODES: Node[] = [
   {
     id: "client",
@@ -24,79 +25,78 @@ const NODES: Node[] = [
     x: 15,
     y: 47,
     color: "#00e5ff",
-    type: "Browser / User",
-    description: "Entry point for all user requests. React frontend running Vite, served over HTTPS via CDN edge nodes.",
+    type: "Browser / Visitor",
+    description: "You, right now. The React single-page app runs entirely in your browser — terminal, carousels, and this map included. No server round-trips after first load.",
   },
   {
-    id: "edge",
-    label: "EDGE",
+    id: "cdn",
+    label: "CDN",
     letter: "E",
-    x: 32,
+    x: 33,
     y: 47,
     color: "#00e5ff",
-    type: "Vercel Edge",
-    description: "Distributed infrastructure that serves content from the nearest global node. Handles routing, caching, and middleware execution.",
+    type: "GitHub Pages / Fastly Edge",
+    description: "Static assets served over HTTPS from GitHub Pages' global CDN (Fastly), with the custom domain utkarshcode.com mapped via CNAME.",
   },
   {
-    id: "engine",
-    label: "ENGINE",
-    letter: "F",
+    id: "app",
+    label: "APP",
+    letter: "A",
     x: 52,
     y: 25,
     color: "#ff2d78",
-    type: "React Engine / BBS",
-    description: "State management, 3D orchestration, and terminal logic. Drives all real-time UI interactions and component trees.",
+    type: "React 18 + Vite SPA",
+    description: "TypeScript, Tailwind, and Radix primitives bundled by Vite. State is plain React hooks — no server, no database, nothing to break at 3am.",
   },
   {
-    id: "analytics",
-    label: "ANALYTICS",
-    letter: "A",
+    id: "forms",
+    label: "FORMS",
+    letter: "F",
     x: 70,
     y: 13,
     color: "#00e5ff",
-    type: "Data Sink",
-    description: "Captures real-time user metrics, performance vitals, and error tracking. Pipes into dashboards for observability.",
+    type: "FormSubmit Relay",
+    description: "The contact form POSTs to FormSubmit's AJAX endpoint, which relays the message to my inbox — the only third-party API call on the site.",
   },
   {
-    id: "api",
-    label: "API",
-    letter: "A",
+    id: "repo",
+    label: "REPO",
+    letter: "R",
     x: 52,
-    y: 65,
+    y: 68,
     color: "#00e5ff",
-    type: "Spring Boot / REST",
-    description: "Core backend API layer. Handles authentication (JWT), business logic, and database transactions via Spring Boot microservices.",
+    type: "GitHub Repository",
+    description: "Source of truth. Public repo — you can read the code behind this exact screen at github.com/Utkarsh-patel26/utkarsh-patel26.github.io.",
   },
   {
-    id: "smtp",
-    label: "SMTP",
-    letter: "S",
+    id: "ci",
+    label: "CI/CD",
+    letter: "G",
     x: 70,
     y: 77,
     color: "#00e5ff",
-    type: "Mail / Notification",
-    description: "Email delivery pipeline. Handles transactional emails, alerts, and async notification dispatch via SMTP relay.",
+    type: "GitHub Actions",
+    description: "Every push to main runs npm ci, vite build, and deploys the dist artifact to Pages. Commit to live site in under two minutes.",
   },
   {
-    id: "db",
-    label: "DATABASE",
-    letter: "D",
+    id: "inbox",
+    label: "INBOX",
+    letter: "I",
     x: 87,
-    y: 50,
+    y: 47,
     color: "#ff2d78",
-    type: "PostgreSQL / Redis",
-    description: "Primary persistence layer. PostgreSQL for relational data with B+ Tree indexing. Redis for hot-path caching and pub/sub.",
+    type: "Email",
+    description: "Where your message lands if you use the contact form. I usually reply within 24 hours.",
   },
 ];
 
 const EDGES: Edge[] = [
-  { from: "client", to: "edge" },
-  { from: "edge", to: "engine" },
-  { from: "edge", to: "api" },
-  { from: "engine", to: "analytics" },
-  { from: "engine", to: "db" },
-  { from: "api", to: "smtp" },
-  { from: "api", to: "db" },
+  { from: "client", to: "cdn" },
+  { from: "cdn", to: "app" },
+  { from: "app", to: "forms" },
+  { from: "forms", to: "inbox" },
+  { from: "repo", to: "ci" },
+  { from: "ci", to: "cdn" },
 ];
 
 type TrafficDot = {
@@ -176,7 +176,7 @@ export const InfrastructureMap = ({ onClose }: { onClose: () => void }) => {
             SYSTEM_TOPOLOGY
           </div>
           <div className="text-[#ff2d78] font-mono text-[10px] tracking-widest mt-0.5 opacity-80">
-            Live Architectural Schematic
+            How this site actually ships — real stack, no fiction
           </div>
         </div>
         <div className="flex gap-3">
@@ -373,7 +373,7 @@ export const InfrastructureMap = ({ onClose }: { onClose: () => void }) => {
                   STATUS: ONLINE
                 </span>
                 <span className="px-2 py-1 rounded border border-green-500/30 text-green-400/70">
-                  LATENCY: {Math.floor(Math.random() * 20 + 2)}ms
+                  COST: $0/mo
                 </span>
               </div>
             </div>

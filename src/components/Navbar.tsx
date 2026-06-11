@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Github } from "lucide-react";
-import avatar from "@/assets/avatar.png";
+import avatar from "@/assets/avatar.webp";
 
 const links = [
   { href: "#home", label: "Home" },

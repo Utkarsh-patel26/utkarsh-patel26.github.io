@@ -14,12 +14,10 @@ export const Terminal = () => {
   const [weatherEffect, setWeatherEffect] = useState<'rain' | 'snow' | null>(null);
   const [showInfra, setShowInfra] = useState(false);
   const [diagnostics, setDiagnostics] = useState({
-    heap: 0,
+    heap: null as number | null,
     nodes: 0,
     fps: 0,
-    net: 'Detecting...',
     uptime: 0,
-    bufferCount: 0,
   });
   const [diagLog, setDiagLog] = useState<string[]>([]);
   const [gameState, setGameState] = useState<{
@@ -58,24 +56,21 @@ export const Terminal = () => {
       frameCount = 0;
       lastTime = now;
 
-      // Chrome-only non-standard API; absent elsewhere
+      // Chrome-only non-standard API; null elsewhere — shown as N/A, never faked
       const mem = (performance as Performance & { memory?: { usedJSHeapSize: number } }).memory;
-      const heap = mem ? Math.round(mem.usedJSHeapSize / 1024 / 1024) : Math.floor(Math.random() * 8 + 8);
+      const heap = mem ? Math.round(mem.usedJSHeapSize / 1024 / 1024) : null;
       const nodes = document.querySelectorAll('*').length;
       const uptime = Math.round(performance.now() / 1000);
-      const bufferCount = Math.floor(Math.random() * 10 + 40);
 
-      setDiagnostics(prev => ({ ...prev, heap, nodes, fps, uptime, bufferCount }));
+      setDiagnostics({ heap, nodes, fps, uptime });
 
       const ts = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
       const logTypes = [
-        `[${ts}] [MEM]: JS Heap: ${heap}MB`,
-        `[${ts}] [DOM]: Live Node Count: ${nodes}`,
-        `[${ts}] [PERF]: Frame composition sync (${(Math.random() * 0.4 + 0.1).toFixed(1)}ms)`,
-        `[${ts}] [FPS]: Render rate: ${fps}fps`,
-        `[${ts}] [GC]: Minor collection: ${Math.floor(Math.random() * 3 + 1)}ms`,
-        `[${ts}] [NET]: RTT latency: ${Math.floor(Math.random() * 20 + 5)}ms`,
-        `[${ts}] [SYS]: Uptime: ${uptime}s`,
+        ...(heap !== null ? [`[${ts}] [MEM]: JS heap: ${heap}MB`] : []),
+        `[${ts}] [DOM]: live node count: ${nodes}`,
+        `[${ts}] [FPS]: render rate: ${fps}fps`,
+        `[${ts}] [SYS]: page uptime: ${uptime}s`,
+        `[${ts}] [VIEW]: viewport ${window.innerWidth}x${window.innerHeight}`,
       ];
       const newEntry = logTypes[Math.floor(Math.random() * logTypes.length)];
       setDiagLog(prev => [...prev.slice(-14), newEntry]);
@@ -377,12 +372,12 @@ export const Terminal = () => {
           <div className="p-3 space-y-2">
             {/* Static system info */}
             <div className="grid grid-cols-2 gap-x-2 gap-y-1 mb-3 border-b border-cyan-500/30 pb-3 text-[10px]">
-              <div>NET: <span className="text-cyan-200">{diagnostics.net}</span></div>
-              <div>PWR: <span className="text-cyan-200">100% (Charging)</span></div>
+              <div>CORES: <span className="text-cyan-200">{navigator.hardwareConcurrency || 'N/A'}</span></div>
+              <div>LANG: <span className="text-cyan-200">{navigator.language}</span></div>
               <div>VIEW: <span className="text-cyan-200">{window.innerWidth}x{window.innerHeight}</span></div>
-              <div>OS: <span className="text-cyan-200">{navigator.platform || 'Unknown'}</span></div>
+              <div>DPR: <span className="text-cyan-200">{window.devicePixelRatio}x</span></div>
               <div>FPS: <span className={`font-bold ${diagnostics.fps >= 50 ? 'text-green-400' : diagnostics.fps >= 30 ? 'text-yellow-400' : 'text-red-400'}`}>{diagnostics.fps}</span></div>
-              <div>HEAP: <span className="text-cyan-200">{diagnostics.heap}MB</span></div>
+              <div>HEAP: <span className="text-cyan-200">{diagnostics.heap !== null ? `${diagnostics.heap}MB` : 'N/A'}</span></div>
               <div>NODES: <span className="text-cyan-200">{diagnostics.nodes}</span></div>
               <div>UP: <span className="text-cyan-200">{diagnostics.uptime}s</span></div>
             </div>
@@ -399,8 +394,8 @@ export const Terminal = () => {
                   } ${
                     line.includes('[MEM]') ? '' :
                     line.includes('[DOM]') ? 'text-blue-300' :
-                    line.includes('[GC]')  ? 'text-yellow-400' :
-                    line.includes('[NET]') ? 'text-green-400' : ''
+                    line.includes('[FPS]') ? 'text-yellow-400' :
+                    line.includes('[VIEW]') ? 'text-green-400' : ''
                   }`}
                 >
                   {line}
@@ -409,7 +404,7 @@ export const Terminal = () => {
             </div>
 
             <div className="text-right text-[9px] opacity-50 mt-2 border-t border-cyan-500/30 pt-2">
-              STREAM_BUFFER: {diagLog.length}/{diagnostics.bufferCount}_ENTRIES
+              STREAM_BUFFER: {diagLog.length}/15_ENTRIES · LIVE BROWSER METRICS
             </div>
           </div>
         </div>

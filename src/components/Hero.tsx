@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, Github } from "lucide-react";
-import avatar from "@/assets/avatar.png";
+import avatar from "@/assets/avatar.webp";
 
 const ROLES = ["Software Engineer", "Backend Developer", "CS Undergrad"];
 
@@ -92,7 +92,10 @@ export const Hero = () => {
             <img
               src={avatar}
               alt="Utkarsh Patel pixel art portrait"
-              className="relative z-10 w-[18rem] md:w-[28rem] drop-shadow-[0_0_30px_rgba(170,54,124,0.4)]"
+              width={896}
+              height={896}
+              fetchPriority="high"
+              className="relative z-10 w-[18rem] md:w-[28rem] h-auto drop-shadow-[0_0_30px_rgba(170,54,124,0.4)]"
             />
           </div>
         </div>
