@@ -5,10 +5,17 @@ import { Experience } from "@/components/Experience";
 import { Projects } from "@/components/Projects";
 import { Publications } from "@/components/Publications";
 import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 import { Terminal } from "@/components/Terminal";
 const Index = () => {
   return (
     <main className="min-h-screen bg-[#040914] text-foreground overflow-x-hidden relative">
+      <a
+        href="#projects"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10002] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary focus:text-white"
+      >
+        Skip to projects
+      </a>
       {/* Deep Space Background Pattern for non-Hero sections */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Repeating Stars Pattern */}
@@ -31,6 +38,7 @@ const Index = () => {
         <Projects />
         <Publications />
         <Contact />
+        <Footer />
       </div>
       <Terminal />
     </main>

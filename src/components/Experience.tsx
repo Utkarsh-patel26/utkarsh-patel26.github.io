@@ -51,7 +51,7 @@ export const Experience = () => {
 
     const timer = setInterval(() => {
       api.scrollNext();
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, [api, isHovered]);

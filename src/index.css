@@ -206,3 +206,30 @@
 .animate-rain {
   animation: rain linear infinite;
 }
+
+/* Visible focus for keyboard users */
+:focus-visible {
+  outline: 2px solid hsl(320 90% 60%);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: hsl(320 90% 60% / 0.4);
+  color: #fff;
+}
+
+/* Respect users who opt out of motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+}

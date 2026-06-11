@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Wrench, Award } from "lucide-react";
+import { ChevronLeft, ChevronRight, Wrench, Award, Github, ExternalLink } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -12,20 +12,24 @@ type Project = {
   desc: string;
   stack: string[];
   badge?: string;
-  linkText?: string;
-  link?: string;
+  github?: string;
+  demo?: string;
 };
+
+const GH = "https://github.com/Utkarsh-patel26";
 
 const main: Project[] = [
   {
     title: "Kronos — Distributed KV Store",
     desc: "Distributed key-value store built from scratch using Raft consensus. Implements leader election, log replication, fault tolerance, snapshots. Handles network partitions and ensures consistency across nodes, similar to etcd / TiKV.",
     stack: ["Distributed Systems", "Raft", "Consensus"],
+    github: `${GH}/Kronos`,
   },
   {
     title: "HelixDB — Relational Database Engine",
     desc: "Fully custom database engine written in Java. Includes SQL parser, query planner, execution engine. Storage engine with B+ Tree indexing and buffer pool. Implements ACID transactions using WAL and Two-Phase Locking.",
     stack: ["Java", "Database Internals", "B+ Trees", "ACID"],
+    github: `${GH}/HelixDB`,
   },
   {
     title: "Forge — JVM + JIT Compiler",
@@ -36,6 +40,7 @@ const main: Project[] = [
     title: "PeerNexus — BitTorrent Client",
     desc: "Full BitTorrent protocol implementation. Includes DHT, peer exchange, magnet links, piece selection. Bandwidth control and persistent state handling. Production-style system with CI/CD and Docker support.",
     stack: ["Networking", "P2P", "Docker", "CI/CD"],
+    github: `${GH}/PeerNexus`,
   },
   {
     title: "Codebase Intelligence & Refactor Assistant",
@@ -47,6 +52,8 @@ const main: Project[] = [
     title: "SoulSupport — Mental Health Platform",
     desc: "Full-stack platform with authentication, sessions, and forums. AI chatbot integration for user support. Dockerized production-ready deployment with Nginx. Real-time features and scalable backend architecture.",
     stack: ["Full-Stack", "AI Integration", "Docker", "Nginx"],
+    github: `${GH}/SoulSupport`,
+    demo: "https://soul-support-hazel.vercel.app",
   },
 ];
 
@@ -55,6 +62,7 @@ const mini: Project[] = [
     title: "GhostClick",
     desc: "Behavioral AI system using Transformer (defender) vs LSTM-GAN (attacker). Focus on simulating and detecting human-like interaction patterns.",
     stack: ["AI", "Transformers", "LSTM-GAN"],
+    github: `${GH}/GhostClick`,
   },
   {
     title: "FarCloser",
@@ -65,26 +73,31 @@ const mini: Project[] = [
     title: "Lumen",
     desc: "Course platform with Node.js backend and React frontend. Supports authentication, enrollment, admin dashboards.",
     stack: ["Node.js", "React", "MongoDB"],
+    github: `${GH}/Lumen`,
   },
   {
     title: "Toxic Comment Detection",
     desc: "NLP pipeline for toxicity classification. Uses TF-IDF + SVM, Logistic Regression, XGBoost. Includes Flask API and dashboard.",
     stack: ["NLP", "Machine Learning", "Flask"],
+    github: `${GH}/Toxic-Comment-Detection`,
   },
   {
     title: "HALEM-PEGASIS Evaluator",
     desc: "Simulation tool for wireless sensor network routing protocols. Compares PEGASIS vs HALEM-PEGASIS. Evaluates energy efficiency, latency, and scalability.",
     stack: ["Simulation", "Networking", "Routing"],
+    github: `${GH}/halem-pegasis-evaluator`,
   },
   {
     title: "knights-tour",
     desc: "Algorithm visualization / implementation project.",
     stack: ["Algorithms", "Visualization"],
+    github: `${GH}/knights-tour`,
   },
   {
     title: "1D-Elastic-Collision",
     desc: "Physics simulation of elastic collisions.",
     stack: ["Physics", "Simulation"],
+    github: `${GH}/1D-Elastic-Collision`,
   },
   {
     title: "Todo-List",
@@ -95,21 +108,25 @@ const mini: Project[] = [
     title: "schedulr",
     desc: "Experimental scheduling UI / frontend project.",
     stack: ["UI", "Experiment"],
+    github: `${GH}/schedulr`,
   },
   {
     title: "crime-justice",
     desc: "Static HTML-based project for reporting and awareness.",
     stack: ["HTML", "Static"],
+    github: `${GH}/crime-justice`,
   },
   {
     title: "utkarsh-patel26.github.io",
-    desc: "Personal portfolio website repository.",
-    stack: ["Portfolio", "Web"],
+    desc: "This portfolio — React, Vite, Tailwind, with an interactive terminal and live system topology demo.",
+    stack: ["Portfolio", "React", "Vite"],
+    github: `${GH}/utkarsh-patel26.github.io`,
   },
   {
     title: "Java (Algorithms Fork)",
     desc: "Collection of algorithm implementations in Java.",
     stack: ["Java", "Algorithms"],
+    github: `${GH}/Java`,
   },
 ];
 
@@ -152,7 +169,7 @@ export const Projects = () => {
     if (isHovered) return;
     const timer = setInterval(() => {
       api.scrollNext();
-    }, 3000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [api, isHovered, tab]);
 
@@ -241,15 +258,31 @@ export const Projects = () => {
                       Stack: <span className="text-gray-400 font-medium">{p.stack.join(", ")}</span>
                     </div>
 
-                    {p.linkText && p.link && (
-                      <a
-                        href={p.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[13px] font-bold text-[#e8508e] hover:text-[#e8508e]/80 transition-colors w-fit"
-                      >
-                        {p.linkText}
-                      </a>
+                    {(p.github || p.demo) && (
+                      <div className="flex items-center gap-4">
+                        {p.github && (
+                          <a
+                            href={p.github}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#e8508e] hover:text-[#e8508e]/80 transition-colors w-fit"
+                            aria-label={`${p.title} source code on GitHub`}
+                          >
+                            <Github className="w-3.5 h-3.5" /> Source
+                          </a>
+                        )}
+                        {p.demo && (
+                          <a
+                            href={p.demo}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#e8508e] hover:text-[#e8508e]/80 transition-colors w-fit"
+                            aria-label={`${p.title} live demo`}
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" /> Live Demo
+                          </a>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -257,6 +290,17 @@ export const Projects = () => {
             ))}
           </CarouselContent>
         </Carousel>
+
+        <div className="text-center mt-12">
+          <a
+            href="https://github.com/Utkarsh-patel26?tab=repositories"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-white/20 text-sm font-semibold text-white hover:bg-white/5 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300"
+          >
+            <Github className="w-4 h-4" /> View all repositories on GitHub
+          </a>
+        </div>
       </div>
     </section>
   );

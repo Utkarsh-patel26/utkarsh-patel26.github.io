@@ -8,6 +8,14 @@ import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
+// GitHub Pages 404.html stashes the original path here before redirecting to /,
+// so deep links (e.g. /something shared in a chat) reach the router intact.
+const spaRedirect = sessionStorage.getItem("spa-redirect");
+if (spaRedirect) {
+  sessionStorage.removeItem("spa-redirect");
+  window.history.replaceState(null, "", spaRedirect);
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>

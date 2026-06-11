@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, ChevronRight, TerminalSquare } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import avatar from "@/assets/avatar.png";
-import orb from "@/assets/orb.png";
 
 const ROLES = ["Software Engineer", "Backend Developer", "CS Undergrad"];
 
@@ -43,8 +42,12 @@ export const Hero = () => {
             Hi! I'm Utkarsh Patel
           </h1>
 
-          <div className="text-5xl md:text-[4rem] font-extrabold text-[#b92b6a] h-20 mb-8 tracking-tight">
-            {text}
+          <div
+            className="text-5xl md:text-[4rem] font-extrabold text-[#b92b6a] min-h-[5rem] mb-8 tracking-tight"
+            aria-label={`Roles: ${ROLES.join(", ")}`}
+          >
+            <span aria-hidden="true">{text}</span>
+            <span aria-hidden="true" className="animate-pulse">|</span>
           </div>
 
           <p className="text-gray-400 text-lg max-w-xl mb-12">
@@ -67,9 +70,16 @@ export const Hero = () => {
               download
               className="inline-flex items-center justify-center px-7 py-3 rounded-[30px] border border-white/30 text-sm font-semibold text-white bg-transparent hover:bg-white/5 hover:-translate-y-1 hover:scale-105 hover:border-primary/50 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.2)] transition-all duration-300 active:scale-95"
             >
-              Save Contact
+              Download Resume
             </a>
-
+            <a
+              href="https://github.com/Utkarsh-patel26"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-[30px] border border-white/30 text-sm font-semibold text-white bg-transparent hover:bg-white/5 hover:-translate-y-1 hover:scale-105 hover:border-primary/50 hover:shadow-[0_0_20px_hsl(320_90%_60%_/_0.2)] transition-all duration-300 active:scale-95"
+            >
+              <Github className="w-4 h-4" /> GitHub
+            </a>
           </div>
         </div>
 
@@ -89,24 +99,20 @@ export const Hero = () => {
       </div>
 
       {/* Floating CLI widget */}
-      <div 
+      <button
+        type="button"
+        aria-label="Open the interactive terminal"
         className="fixed bottom-8 right-8 z-[10001] flex flex-col items-center gap-3 animate-fade-up cursor-pointer group"
-        onClick={() => {
-          if ((window as any).openTerminal) {
-            (window as any).openTerminal();
-          } else {
-            window.dispatchEvent(new CustomEvent('open-terminal'));
-          }
-        }}
+        onClick={() => window.dispatchEvent(new CustomEvent('open-terminal'))}
       >
-        <div className="bg-[#b92b6a] text-white text-xs font-bold px-4 py-2 rounded-full shadow-[0_0_20px_rgba(185,43,106,0.4)] group-hover:scale-105 transition-transform flex items-center gap-1.5">
+        <span className="bg-[#b92b6a] text-white text-xs font-bold px-4 py-2 rounded-full shadow-[0_0_20px_rgba(185,43,106,0.4)] group-hover:scale-105 transition-transform flex items-center gap-1.5 relative">
           Try my CLI! 🚀
-          <div className="absolute right-[22px] -bottom-[6px] w-3 h-3 bg-[#b92b6a] rotate-45 transform origin-center"></div>
-        </div>
-        <button className="w-12 h-12 bg-[#332f42] border border-white/20 rounded-full flex items-center justify-center text-white/90 shadow-[0_0_15px_rgba(185,43,106,0.3)] group-hover:scale-110 group-hover:bg-[#b92b6a] transition-all duration-300 font-mono text-sm leading-none z-10 active:scale-95">
+          <span className="absolute right-[22px] -bottom-[6px] w-3 h-3 bg-[#b92b6a] rotate-45 transform origin-center"></span>
+        </span>
+        <span className="w-12 h-12 bg-[#332f42] border border-white/20 rounded-full flex items-center justify-center text-white/90 shadow-[0_0_15px_rgba(185,43,106,0.3)] group-hover:scale-110 group-hover:bg-[#b92b6a] transition-all duration-300 font-mono text-sm leading-none z-10 active:scale-95">
           &gt;_
-        </button>
-      </div>
+        </span>
+      </button>
 
     </section>
   );

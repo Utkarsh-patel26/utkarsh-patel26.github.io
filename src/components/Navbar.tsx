@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Linkedin, Github, Code2 } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
 import avatar from "@/assets/avatar.png";
 
 const links = [
@@ -8,6 +8,7 @@ const links = [
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#publications", label: "Publications" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export const Navbar = () => {
@@ -16,7 +17,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -26,18 +27,20 @@ export const Navbar = () => {
         scrolled ? "py-2 bg-background/70 backdrop-blur-xl border-b border-border" : "py-4"
       }`}
     >
-      <nav className="max-w-[1400px] w-full mx-auto px-6 md:px-12 flex items-center justify-between">
-        <a href="#home" className="flex items-center">
+      <nav className="max-w-[1400px] w-full mx-auto px-6 md:px-12 flex items-center justify-between" aria-label="Main navigation">
+        <a href="#home" className="flex items-center" aria-label="Back to top">
           <div className="w-[52px] h-[52px] rounded-full border-[1.5px] border-white/90 p-[2px] flex items-center justify-center hover:opacity-90 transition-opacity">
             <img
               src={avatar}
               alt="Utkarsh Patel avatar"
+              width={48}
+              height={48}
               className="w-full h-full rounded-full object-cover"
             />
           </div>
         </a>
 
-        <ul className="hidden md:flex flex-1 items-center justify-center gap-8 lg:gap-14 ml-4 lg:ml-12">
+        <ul className="hidden md:flex flex-1 items-center justify-center gap-6 lg:gap-12 ml-4 lg:ml-12">
           {links.map((l) => (
             <li key={l.href}>
               <a
@@ -51,26 +54,13 @@ export const Navbar = () => {
         </ul>
 
         <div className="hidden md:flex items-center gap-4">
-          <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" rel="noreferrer" aria-label="LinkedIn"
+          <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile"
             className="w-[42px] h-[42px] rounded-full border-[1.5px] border-white/90 flex items-center justify-center text-white hover:bg-white/20 transition">
             <span className="text-[14px] font-bold leading-none">in</span>
           </a>
-          <a href="https://instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram"
+          <a href="https://github.com/Utkarsh-patel26" target="_blank" rel="noreferrer" aria-label="GitHub profile"
             className="w-[42px] h-[42px] rounded-full border-[1.5px] border-white/90 flex items-center justify-center text-white hover:bg-white/20 transition">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="18" height="18" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            >
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
+            <Github className="w-[18px] h-[18px]" />
           </a>
           <a
             href="/Utkarsh_Patel_Resume.pdf"
@@ -84,7 +74,8 @@ export const Navbar = () => {
         <button
           className="md:hidden text-foreground"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
         >
           {open ? <X /> : <Menu />}
         </button>
@@ -98,6 +89,17 @@ export const Navbar = () => {
               {l.label}
             </a>
           ))}
+          <div className="flex items-center gap-4 pt-2 border-t border-white/10">
+            <a href="https://github.com/Utkarsh-patel26" target="_blank" rel="noreferrer" aria-label="GitHub profile" className="text-white/80 hover:text-white">
+              <Github className="w-5 h-5" />
+            </a>
+            <a href="https://www.linkedin.com/in/utkarshpatel26/" target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="text-white/80 hover:text-white text-sm font-bold">
+              in
+            </a>
+            <a href="/Utkarsh_Patel_Resume.pdf" download className="ml-auto text-sm font-semibold text-primary">
+              Download CV
+            </a>
+          </div>
         </div>
       )}
     </header>

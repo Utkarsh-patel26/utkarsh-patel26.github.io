@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utkarsh Patel — Page Not Found</title>
+    <meta name="robots" content="noindex" />
+    <!-- GitHub Pages serves this for unknown paths. Redirect into the SPA,
+         preserving the path so React Router can render its own 404. -->
+    <script>
+      sessionStorage.setItem("spa-redirect", location.pathname + location.search + location.hash);
+      location.replace("/");
+    </script>
+  </head>
+  <body style="background:#040914;color:#fff;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0">
+    <p>Redirecting&hellip; <a href="/" style="color:#e8508e">Go home</a></p>
+  </body>
+</html>
